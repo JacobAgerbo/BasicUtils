@@ -202,7 +202,9 @@ suppressWarnings({
   
   
   # Return the plot
-  return(pca_plot)
+  pdf(paste(group_var, '.pdf', sep=""), width=8, height=8)
+    pca_plot
+    dev.off()
 }
 
 

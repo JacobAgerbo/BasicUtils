@@ -144,7 +144,9 @@ generate_plots <- function(data, group_var, interations = 5) {
   }
   
   # Return the list of plots
-  return(plot_list)
+  pdf(paste(group_var, '.pdf', sep=""), width=8, height=8)
+    plot_list
+    dev.off()
 }
 
 # Example usage

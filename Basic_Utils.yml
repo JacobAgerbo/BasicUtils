@@ -15,6 +15,7 @@ dependencies:
 - bwa 
 - samtools
 - fastq-pair
+- biopython
 - jags
 - r-base
 - r-rjags

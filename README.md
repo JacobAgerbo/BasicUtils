@@ -16,18 +16,28 @@ This repository contains a basic utility script that can be used for analyzing b
 
 The script requires the following dependencies to be installed:
 
-- Python (version X.X.X)
-- R (version X.X.X)
+- Python (version 3.10)
+- R (version 4.2)
 - Bioconductor packages (e.g., limma, edgeR)
 - Other Python libraries (e.g., pandas, numpy, matplotlib)
+
+But all requirements can easily be installed with conda, like:
+
+```
+git clone https://github.com/JacobAgerbo/Basic_Utils.git 
+cd Basic_Utils
+conda env create -f Basic_Utils.yml
+conda activate Basic_Utils
+```
+
+Now you are ready to go!
 
 ## Usage
 
 To use the script, follow these steps:
 
 1. Clone the repository to your local machine.
-2. Install the required dependencies listed in the `requirements.txt` file.
-3. At basic conda environment called `Basic_Utils` will be the foundation of these bioinformatic processes
+2. A basic conda environment called `Basic_Utils` will be the foundation of these bioinformatic processes
 
 ## Contributions
 

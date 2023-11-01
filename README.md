@@ -37,7 +37,8 @@ Now you are ready to go!
 To use the script, follow these steps:
 
 1. Clone the repository to your local machine.
-2. A basic conda environment called `Basic_Utils` will be the foundation of these bioinformatic processes
+2. A basic conda environment called `Basic_Utils` will be the foundation of these bioinformatic processes.
+3. Now you should be able to run all the scripts in this repository.
 
 ## Contributions
 

@@ -45,13 +45,14 @@ busco="busco"
 spades="metaspades.py"
 quickmerge="merge_wrapper.py"
 
-BIN="$USER/.bin"
-
+BIN="./misc"
 if [[ ! -d $BIN ]]; then
     THUMBS_UP='\U1F44D'; echo -e "$(tput setaf 1)misc files for this script doent exist.. $(tput sgr 0)"
     THUMBS_UP='\U1F44D'; echo -e "$(tput setaf 2)Files will be available at: $BIN $THUMBS_UP $(tput sgr 0)"
-    wget -O $BIN 
-
+    mkdir $BIN
+    git clone https://github.com/JacobAgerbo/Basic_Utils.git 
+    mv Basic_Utils/bin/* $BIN
+    rm -rf Basic_Utils
 fi
 
 # Create output directory if it does not exist

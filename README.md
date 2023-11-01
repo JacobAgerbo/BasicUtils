@@ -27,8 +27,7 @@ To use the script, follow these steps:
 
 1. Clone the repository to your local machine.
 2. Install the required dependencies listed in the `requirements.txt` file.
-3. Update the configuration file (`config.yaml`) with your specific parameters and paths.
-4. Run the script using the command `python main.py`.
+3. At basic conda environment called `Basic_Utils` will be the foundation of these bioinformatic processes
 
 ## Contributions
 

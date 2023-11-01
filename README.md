@@ -4,13 +4,13 @@ This repository contains a basic utility script that can be used for analyzing b
 
 ## Features
 
-- Data preprocessing: The script includes functions for preprocessing omics data, such as quality control, filtering, normalization, and transformation.
+- **Bioinformatic processing**: The script includes functions for preprocessing omics data, such as quality control, filtering, normalization, and transformation.
 
-- Statistical analysis: It offers various statistical analysis methods for identifying differentially expressed genes, proteins, or metabolites between different conditions or groups.
+- **Statistical analysis**: It offers various statistical analysis methods for identifying differentially expressed genes, proteins, or metabolites between different conditions or groups.
 
-- Visualization: The script includes functions for generating visualizations, such as heatmaps, volcano plots, and pathway enrichment plots, to aid in data exploration and interpretation.
+- **Visualization**: The script includes functions for generating visualizations, such as heatmaps, volcano plots, and pathway enrichment plots, to aid in data exploration and interpretation.
 
-- Documentation: The script is thoroughly documented, providing explanations and examples for each function to facilitate its usage and customization.
+- **Documentation**: The script is thoroughly documented, providing explanations and examples for each function to facilitate its usage and customization.
 
 ## Requirements
 

@@ -3,8 +3,8 @@
 # Author: Jacob Agerbo Rasmussen
 # Load necessary packages
 suppressWarnings({ 
-  library(tidyverse, quietly = TRUE,
-          warn.conflicts = FALSE)
+  suppressPackageStartupMessages(library(tidyverse, quietly = TRUE,
+          warn.conflicts = FALSE))
   theme_ridges <- function(font_size = 14, font_family = "", line_size = .5, grid = TRUE, center_axis_labels = FALSE) {
     half_line <- font_size / 2
     small_rel <- 0.857
@@ -218,3 +218,12 @@ suppressWarnings({
 #                  palette ="Dark2", alpha = 0.5, 
 #                  plot.centroids = TRUE)
 
+args <- commandArgs(trailingOnly = TRUE)
+data <- args[1]
+group_var <- args[2]
+method <- args[3]
+palette <- args[4]
+alpha <- args[5]
+lg.position <- args[6]
+plot.centroids <- args[7]
+plot_title <- args[8]

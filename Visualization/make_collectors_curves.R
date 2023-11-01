@@ -6,10 +6,10 @@
 # Define the function
 generate_plots <- function(data, group_var, interations = 5) {
   suppressWarnings({ 
-    library(tidyverse, quietly = TRUE,
-            warn.conflicts = FALSE)
-    library(reshape2)
-    library(cowplot)
+    suppressPackageStartupMessages(library(tidyverse, quietly = TRUE,
+            warn.conflicts = FALSE))
+    suppressPackageStartupMessages(library(reshape2))
+    suppressPackageStartupMessages(library(cowplot))
     theme_ridges <- function(font_size = 14, font_family = "", line_size = .5, grid = TRUE, center_axis_labels = FALSE) {
       half_line <- font_size / 2
       small_rel <- 0.857
@@ -156,3 +156,8 @@ generate_plots <- function(data, group_var, interations = 5) {
 
 # Generate plots for the sample data frame and group variable
 #generate_plots(data, group_var, interations = 50)
+
+args <- commandArgs(trailingOnly = TRUE)
+data <- args[1]
+group_var <- args[2]
+interations <- as.integer(args[3])

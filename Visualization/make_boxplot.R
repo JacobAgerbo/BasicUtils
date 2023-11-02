@@ -2,7 +2,7 @@
 # R Script for Generating PCA Plot
 # Author: Jacob Agerbo Rasmussen
 # Load required libraries
-})
+
 # Define a function to generate a boxplot
 generate_boxplot <- function(data, 
                              group_var=NULL, 

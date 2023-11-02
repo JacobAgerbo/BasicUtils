@@ -1,5 +1,5 @@
 #!/usr/bin/env Rscript
-# R Script for Generating PCA Plot
+# R Script for Generating collector's curves Plot
 # Author: Jacob Agerbo Rasmussen
 # Load necessary packages
 

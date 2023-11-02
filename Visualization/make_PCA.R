@@ -72,13 +72,3 @@
 #                  group_var = group_var, 
 #                  palette ="Dark2", alpha = 0.5, 
 #                  plot.centroids = TRUE)
-
-args <- commandArgs(trailingOnly = TRUE)
-data <- args[1]
-group_var <- args[2]
-method <- args[3]
-palette <- args[4]
-alpha <- args[5]
-lg.position <- args[6]
-plot.centroids <- args[7]
-plot_title <- args[8]

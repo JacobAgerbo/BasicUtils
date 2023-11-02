@@ -2,9 +2,10 @@
 # R Script for Generating PCA Plot
 # Author: Jacob Agerbo Rasmussen
 # Load necessary packages
-suppressWarnings({ 
-  suppressPackageStartupMessages(library(tidyverse, quietly = TRUE,
-          warn.conflicts = FALSE))
+# Function to generate PCA plot
+ generate_pca_plot <- function(data, group_var = NULL, method = "euclidean", 
+                               palette = "Dark2", alpha = 0.75, lg.position = "bottom", plot.centroids = FALSE,
+                               plot_title = "PCA Plot") 
   theme_ridges <- function(font_size = 14, font_family = "", line_size = .5, grid = TRUE, center_axis_labels = FALSE) {
     half_line <- font_size / 2
     small_rel <- 0.857
@@ -77,12 +78,7 @@ suppressWarnings({
         complete = TRUE
       )
   }
-})
-
-# Function to generate PCA plot
- generate_pca_plot <- function(data, group_var = NULL, method = "euclidean", 
-                               palette = "Dark2", alpha = 0.75, lg.position = "bottom", plot.centroids = FALSE,
-                               plot_title = "PCA Plot") {
+})                                
    suppressWarnings({ 
      library(tidyverse, quietly = TRUE,
              warn.conflicts = FALSE)

@@ -3,7 +3,7 @@
 # Author: Jacob Agerbo Rasmussen
 
 # Define function to create iNEXT figure
-do_iNEXT <- function(data, sample_data = NULL, group_var = NULL) {
+do_iNEXT <- function(data, sample_data = NULL, group_var = NULL, table=FALSE) {
   #Load dependencies
   suppressPackageStartupMessages(library(tidyverse))
   suppressPackageStartupMessages(library(iNEXT))
@@ -30,12 +30,30 @@ do_iNEXT <- function(data, sample_data = NULL, group_var = NULL) {
     # Perform iNEXT analysis on the relevant columns of iNEXT.table
     out.inc <- iNEXT(iNEXT.table, q = 0, datatype = "incidence_freq")
     
+    Extrapolated_data <- data.frame(
+      Assemblage = out.inc[["iNextEst"]][["size_based"]][["Assemblage"]],
+      qD = out.inc[["iNextEst"]][["size_based"]][["qD"]],
+      Method = out.inc[["iNextEst"]][["size_based"]][["Method"]]) %>%
+      filter(Method != "Rarefaction") %>%
+      group_by(Assemblage, Method) %>%
+      summarise(mean_qD = mean(qD),
+                SD = sd(qD))
+    
   } else {
     data.agg <- as.data.frame(colSums(data))
     data.agg <- ifelse(data.agg > 0,1,0)
     n <- length(data)
     iNEXT.table <- rbind(n, data.agg)
     out.inc <- iNEXT(iNEXT.table, q = 0, datatype = "incidence_freq")
+    
+    Extrapolated_data <- data.frame(
+      Assemblage = out.inc[["iNextEst"]][["size_based"]][["Assemblage"]],
+      qD = out.inc[["iNextEst"]][["size_based"]][["qD"]],
+      Method = out.inc[["iNextEst"]][["size_based"]][["Method"]]) %>%
+      filter(Method != "Rarefaction") %>%
+      group_by(Assemblage, Method) %>%
+      summarise(mean_qD = mean(qD),
+                SD = sd(qD))
   }
   
   # Create iNEXT plot type 1 with reordered facets
@@ -58,21 +76,15 @@ do_iNEXT <- function(data, sample_data = NULL, group_var = NULL) {
       ),
       legend.position = "none"
     )
-  return(plot)
+
   })
+
+  if (isTRUE(table)) {
+    # Code to be executed if condition is true
+    return(list(plot = plot, table = Extrapolated_data))
+  } else {
+    # Code to be executed if condition is false
+    return(list(plot = plot))
+  }
+  
 }
-
-
-
-
-#data <- data.frame(matrix(sample(0:75, 800, replace = TRUE), ncol = 20))
-#data[data < 70] <- 0
-
-#sample_data <- data.frame("Sample" = paste("Sample",c(20),sep = "_"), 
-                          "Group" = rep(c("Group A", "Group B"), each = 10))
-
-#colnames(data) <- sample_data$Sample
-
-#do_iNEXT(data = data, sample_data = sample_data, group_var = "Group")
-
-##

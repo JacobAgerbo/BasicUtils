@@ -158,8 +158,3 @@ generate_plots <- function(data, group_var, interations = 5) {
 
 # Generate plots for the sample data frame and group variable
 #generate_plots(data, group_var, interations = 50)
-
-args <- commandArgs(trailingOnly = TRUE)
-data <- args[1]
-group_var <- args[2]
-interations <- as.integer(args[3])

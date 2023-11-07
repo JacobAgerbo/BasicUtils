@@ -5,22 +5,22 @@
 
 # Define the function
 find_biomarkers <- function(data,
-                    sample_data,
-                    feature,
-                    exp_var, 
-                    random_var, 
-                    datatype = c("logcpm", "relabu", "counts"), 
-                    method = c("GLM", "RF", "both"),
-                    top_biomarker=0.1,
-                    prevalence_tolerance=0.01){
+                            sample_data,
+                            exp_var,
+                            datatype = c("logcpm", "relabu", "counts"), 
+                            method = c("GLM", "RF", "both"),
+                            top_biomarker=0.1,
+                            prevalence_tolerance=0.01){
   
   exp_var = exp_var
-  random_var = random_var
   datatype = match.arg(datatype)
   method = match.arg(method)
-  feature = feature
   top_biomarker=top_biomarker
-
+  
+  suppressWarnings({
+  print("Starting finding biomarkers")
+  start_time <- Sys.time()  # Record the start time
+    
   # Set dependencies
   suppressWarnings({ 
     suppressPackageStartupMessages(library(tidyverse))
@@ -33,6 +33,80 @@ find_biomarkers <- function(data,
     suppressPackageStartupMessages(library(caret))
     suppressPackageStartupMessages(library(wesanderson))
     suppressPackageStartupMessages(library(hilldiv))
+    ## ggplot theme
+    theme_ridges <- function(font_size = 14, font_family = "", line_size = .5, grid = TRUE, center_axis_labels = FALSE) {
+      half_line <- font_size / 2
+      small_rel <- 0.857
+      small_size <- small_rel * font_size
+      color <- "grey90"
+      
+      if (grid) {
+        panel.grid.major <- element_line(colour = color, linewidth = line_size)
+        axis.ticks       <- element_line(colour = color, linewidth = line_size)
+        axis.ticks.y     <- axis.ticks
+      }
+      else {
+        panel.grid.major <- element_blank()
+        axis.ticks       <- element_line(colour = "black", linewidth = line_size)
+        axis.ticks.y     <- element_blank()
+      }
+      
+      if (center_axis_labels) {
+        axis_just <- 0.5
+      }
+      else {
+        axis_just <- 1.0
+      }
+      
+      theme_grey(base_size = font_size, base_family = font_family) %+replace%
+        theme(
+          rect              = element_rect(fill = "transparent", colour = NA, color = NA, linewidth = 0, linetype = 0),
+          text              = element_text(family = font_family, face = "plain", colour = "black",
+                                           size = font_size, hjust = 0.5, vjust = 0.5, angle = 0, lineheight = .9,
+                                           margin = margin(), debug = FALSE),
+          axis.text         = element_text(colour = "black", size = small_size),
+          #axis.title        = element_text(face = "bold"),
+          axis.text.x       = element_text(margin = margin(t = small_size / 4), vjust = 1),
+          axis.text.y       = element_text(margin = margin(r = small_size / 4), hjust = 1, vjust = 0),
+          axis.title.x      = element_text(
+            margin = margin(t = small_size / 2, b = small_size / 4),
+            hjust = axis_just
+          ),
+          axis.title.y      = element_text(
+            angle = 90,
+            margin = margin(r = small_size / 2, l = small_size / 4),
+            hjust = axis_just
+          ),
+          axis.ticks        = axis.ticks,
+          axis.ticks.y      = axis.ticks.y,
+          axis.line         = element_blank(),
+          legend.key        = element_blank(),
+          legend.key.size   = grid::unit(1, "lines"),
+          legend.text       = element_text(size = rel(small_rel)),
+          legend.justification = c("left", "center"),
+          panel.background  = element_blank(),
+          panel.border      = element_blank(),
+          # make grid lines
+          panel.grid.major  = panel.grid.major,
+          panel.grid.minor  = element_blank(),
+          strip.text        = element_text(size = rel(small_rel)),
+          strip.background  = element_rect(fill = "grey80", colour = "grey50", linewidth = 0),
+          plot.background   = element_blank(),
+          plot.title        = element_text(face = "bold",
+                                           size = font_size,
+                                           margin = margin(b = half_line), hjust = 0),
+          plot.subtitle     = element_text(size = rel(small_rel),
+                                           hjust = 0, vjust = 1,
+                                           margin = margin(b = half_line * small_rel)),
+          plot.caption      = element_text(size = rel(small_rel),
+                                           hjust = 1, vjust = 1,
+                                           margin = margin(t = half_line * small_rel)),
+          plot.margin       = margin(half_line, font_size, half_line, half_line),
+          
+          complete = TRUE
+        )
+    }
+    
   })
   
   if (datatype == "relabu"){
@@ -45,8 +119,6 @@ find_biomarkers <- function(data,
     }
   }
   
-  ## ggplot theme
-  theme_ridges <- source("https://raw.githubusercontent.com/wilkelab/ggridges/master/R/theme.R")
   
   #
   df <- data %>%
@@ -92,7 +164,7 @@ find_biomarkers <- function(data,
     method.cap = "Generalized linear models (GLMs)"
     # Fit model
     model_fit_glm <- 
-      caret::train(y ~ ., data = logcpm_table, method = "glmnet", 
+      caret::train(y ~ ., data = df, method = "glmnet", 
                    tuneLength = 5, trControl = fitControl, metric = "ROC")
     model.plot <- ggplot(model_fit_glm) + theme_bw()
     
@@ -144,6 +216,9 @@ find_biomarkers <- function(data,
                                            round((calc_auc(g))$AUC[1],4)))
     
     
+    # Print the estimated remaining time
+    print("Still working...")
+    
     # Prevalence plot
     df_prevalence <- t(data) %>%
       as_tibble()
@@ -159,7 +234,7 @@ find_biomarkers <- function(data,
         prevalence = sum(presence)
       )
     
-    Group_B <- df %>%
+    Group_B <- df_prevalence %>%
       hilldiv::tss() %>%
       mutate(Sample = sample_data$Sample, .before = 1)  %>%
       filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[2]]) %>%
@@ -178,7 +253,7 @@ find_biomarkers <- function(data,
         deviation = x-y,
         deviation = sqrt(deviation*deviation) # had to make some kind of wierd trans to make all positive integers.
       )
-    
+    prevalence_df$Feature <- ifelse(log(prevalence_df$deviation) > 2.5, prevalence_df$Feature, "")
     prevalence_plot  <- ggplot(data=prevalence_df, aes(x=x, y=y, label=Feature, color = deviation)) +
       xlab(paste("Prevalence (", Groups[1],")", sep = "")) + ylab(paste("Prevalence (", Groups[2],")", sep = "")) +
       geom_point(alpha = 0.65, size = 3) +
@@ -203,7 +278,7 @@ find_biomarkers <- function(data,
     method.cap = "Random Forrest (RF)"
     
     model_fit_rf <- 
-      caret::train(y ~ ., data = logcpm_table, method = "ranger", 
+      caret::train(y ~ ., data = df, method = "ranger", 
                    trControl = fitControl, tuneLength = 5, 
                    metric = "ROC", importance = "impurity")
     
@@ -225,7 +300,7 @@ find_biomarkers <- function(data,
     importance_df_rf$biomarker <- paste("RF", importance_df_rf$biomarker)
     importance_df_rf$Type <- rep("Random Forrest", length(rownames(importance_df_rf)))
     #
-    importance_df <- rbind(importance_df_glm,importance_df_rf)
+    importance_df <- importance_df_rf
     #write.csv(importance_df, file = "biomarkers_importance_PRO.csv")
     #
     importance_plot <- ggplot2::ggplot() + 
@@ -255,6 +330,10 @@ find_biomarkers <- function(data,
                              label = paste("AUC - RF =", round((calc_auc(g))$AUC[2], 
                                                                4)))
     
+    
+    # Print the estimated remaining time
+    print("Still working...")
+
     # Prevalence plot
     df_prevalence <- t(data) %>%
       as_tibble()
@@ -270,7 +349,7 @@ find_biomarkers <- function(data,
         prevalence = sum(presence)
       )
     
-    Group_B <- df %>%
+    Group_B <- df_prevalence %>%
       hilldiv::tss() %>%
       mutate(Sample = sample_data$Sample, .before = 1)  %>%
       filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[2]]) %>%
@@ -290,7 +369,7 @@ find_biomarkers <- function(data,
         deviation = x-y,
         deviation = sqrt(deviation*deviation) # had to make some kind of wierd trans to make all positive integers.
       )
-    
+    prevalence_df$Feature <- ifelse(log(prevalence_df$deviation) > 2.5, prevalence_df$Feature, "")
     prevalence_plot <- ggplot(data=prevalence_df, aes(x=x, y=y, label=Feature, color = deviation)) +
       xlab(paste("Prevalence (", Groups[1],")", sep = "")) + ylab(paste("Prevalence (", Groups[2],")", sep = "")) +
       geom_point(alpha = 0.65, size = 3) +
@@ -317,11 +396,11 @@ find_biomarkers <- function(data,
     
     # Both
     model_fit_glm <- 
-      caret::train(y ~ ., data = logcpm_table, method = "glmnet", 
+      caret::train(y ~ ., data = df, method = "glmnet", 
                    tuneLength = 5, trControl = fitControl, metric = "ROC")
     
     model_fit_rf <- 
-      caret::train(y ~ ., data = logcpm_table, method = "ranger", 
+      caret::train(y ~ ., data = df, method = "ranger", 
                    trControl = fitControl, tuneLength = 5, 
                    metric = "ROC", importance = "impurity")
     
@@ -400,6 +479,11 @@ find_biomarkers <- function(data,
                                                                                 label = paste("AUC - RF =", round((calc_auc(g))$AUC[2], 
                                                                                                                   4)))
     
+    
+    # Print the estimated remaining time
+    print("Still working...")
+
+    
     # Prevalence plot
     df_prevalence <- t(data) %>%
       as_tibble()
@@ -415,7 +499,7 @@ find_biomarkers <- function(data,
         prevalence = sum(presence)
       )
     
-    Group_B <- df %>%
+    Group_B <- df_prevalence %>%
       hilldiv::tss() %>%
       mutate(Sample = sample_data$Sample, .before = 1)  %>%
       filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[2]]) %>%
@@ -435,7 +519,7 @@ find_biomarkers <- function(data,
         deviation = x-y,
         deviation = sqrt(deviation*deviation) # had to make some kind of wierd trans to make all positive integers.
       )
-    
+    prevalence_df$Feature <- ifelse(log(prevalence_df$deviation) > 2.5, prevalence_df$Feature, "")
     prevalence_plot <- ggplot(data=prevalence_df, aes(x=x, y=y, label=Feature, color = deviation)) +
       xlab(paste("Prevalence (", Groups[1],")", sep = "")) + ylab(paste("Prevalence (", Groups[2],")", sep = "")) +
       geom_point(alpha = 0.65, size = 3) +
@@ -455,6 +539,14 @@ find_biomarkers <- function(data,
                                    labels = "AUTO")
     
   }
+  
+})
+  end_time <- Sys.time()  # Record the end time
+  elapsed_time <- end_time - start_time  # Calculate the elapsed time
+  # Print the estimated remaining time
+  print("Job is done")
+  print("This job took:")
+  print(elapsed_time)  
 }
 
 
@@ -462,17 +554,31 @@ find_biomarkers <- function(data,
 set.seed(1234)
 data1 <- matrix(rpois(10000, 50), nrow = 100)
 data2 <- matrix(rpois(5000, 4), nrow = 50)
-data3 <- matrix(rpois(50, 1000), nrow = 1)
-data4 <- matrix(rpois(50, 10), nrow = 1)
-data3 <- cbind(data3,data4)
-data <- rbind(data3, data1, data2)
-rm(data1, data2, data3, data4)
-
+data31 <- matrix(rpois(50, 1000), nrow = 1)
+data32 <- matrix(rpois(50, 1000), nrow = 1)
+data33 <- matrix(rpois(50, 200), nrow = 1)
+data41 <- matrix(rpois(50, 100), nrow = 1)
+data42 <- matrix(rpois(50, 50), nrow = 1)
+data43 <- matrix(rpois(50, 1000), nrow = 1)
+data3 <- cbind(data31,data41)
+data4 <- cbind(data32,data42)
+data5 <- cbind(data33,data43)
+data <- rbind(data3,data4,data5, data1, data2)
+rm(data1, data2, data3, data4,data5)
+rm(data31,data32,data33,data41,data42,data43)
 colnames(data) <- c(paste0("Sample", 1:ncol(data)))
 sample_data <- data.frame("Sample"= colnames(data),
-                          "Group" = rep(c("Group A", "Group B"), each = 50))
+                          "Group" = rep(c("GroupA", "GroupB"), each = 50))
 
 df <- t(data) %>%
   as_tibble()
 
+find_biomarkers(data = data,
+                            sample_data = sample_data,
+                            exp_var = "Group", 
+                            datatype = "counts", 
+                            method = "RF",
+                            top_biomarker=0.1,
+                            prevalence_tolerance=0.01)
+   
   

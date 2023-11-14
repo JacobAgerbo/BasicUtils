@@ -377,6 +377,7 @@ find_biomarkers <- function(data,
       close(pb)
       end_time <- Sys.time()  # Record the end time
       elapsed_time <- end_time - start_time  # Calculate the elapsed time
+      elapsed_time <- round(elapsed_time,2)
       # Print the estimated remaining time
       cat(paste(green, "Success:", reset, "Operation completed successfully!\n"))
       cat(paste("\n"))
@@ -566,6 +567,7 @@ find_biomarkers <- function(data,
       close(pb)
       end_time <- Sys.time()  # Record the end time
       elapsed_time <- end_time - start_time  # Calculate the elapsed time
+      elapsed_time <- round(elapsed_time,2)
       # Print the estimated remaining time
       cat(paste(green, "Success:", reset, "Operation completed successfully!\n"))
       cat(paste("\n"))

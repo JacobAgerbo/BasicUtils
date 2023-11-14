@@ -301,7 +301,7 @@ find_biomarkers <- function(data,
           Group_A <- df_prevalence %>%
             hilldiv::tss() %>%
             mutate(Sample = sample_data$Sample, .before = 1)  %>%
-            filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[1]]) %>%
+            filter(Sample %in% sample_data$Sample[sample_data[,exp_var] == Groups[1]]) %>%
             reshape2::melt() %>%
             mutate(presence= ifelse(value > prevalence_tolerance, 1,0)) %>%
             group_by(variable) %>%
@@ -318,7 +318,7 @@ find_biomarkers <- function(data,
           Group_B <- df_prevalence %>%
             hilldiv::tss() %>%
             mutate(Sample = sample_data$Sample, .before = 1)  %>%
-            filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[2]]) %>%
+            filter(Sample %in% sample_data$Sample[sample_data[,exp_var] == Groups[2]]) %>%
             reshape2::melt() %>%
             mutate(presence= ifelse(value > prevalence_tolerance, 1,0)) %>%
             group_by(variable) %>%
@@ -352,8 +352,8 @@ find_biomarkers <- function(data,
         ggrepel::geom_text_repel() +
         theme_minimal() +
         geom_abline(slope = 1, intercept = 0) +
-        xlim(0,length(sample_data$Sample[sample_data$Group == Groups[1]])) +
-        ylim(0,length(sample_data$Sample[sample_data$Group == Groups[2]])) +
+        xlim(0,length(sample_data$Sample[sample_data[,exp_var] == Groups[1]])) +
+        ylim(0,length(sample_data$Sample[sample_data[,exp_var] == Groups[2]])) +
         theme_ridges() +
         scale_color_gradientn(colors = c(wesanderson::wes_palette(21, name = "Zissou1", type = "continuous")))
       
@@ -475,7 +475,7 @@ find_biomarkers <- function(data,
           Group_A <- df_prevalence %>%
             hilldiv::tss() %>%
             mutate(Sample = sample_data$Sample, .before = 1)  %>%
-            filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[1]]) %>%
+            filter(Sample %in% sample_data$Sample[sample_data[,exp_var] == Groups[1]]) %>%
             reshape2::melt() %>%
             mutate(presence= ifelse(value > prevalence_tolerance, 1,0)) %>%
             group_by(variable) %>%
@@ -492,7 +492,7 @@ find_biomarkers <- function(data,
           Group_B <- df_prevalence %>%
             hilldiv::tss() %>%
             mutate(Sample = sample_data$Sample, .before = 1)  %>%
-            filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[2]]) %>%
+            filter(Sample %in% sample_data$Sample[sample_data[,exp_var] == Groups[2]]) %>%
             reshape2::melt() %>%
             mutate(presence= ifelse(value > prevalence_tolerance, 1,0)) %>%
             group_by(variable) %>%
@@ -526,8 +526,8 @@ find_biomarkers <- function(data,
         ggrepel::geom_text_repel() +
         theme_minimal() +
         geom_abline(slope = 1, intercept = 0) +
-        xlim(0,length(sample_data$Sample[sample_data$Group == Groups[1]])) +
-        ylim(0,length(sample_data$Sample[sample_data$Group == Groups[2]])) +
+        xlim(0,length(sample_data$Sample[sample_data[,exp_var] == Groups[1]])) +
+        ylim(0,length(sample_data$Sample[sample_data[,exp_var] == Groups[2]])) +
         theme_ridges() +
         scale_color_gradientn(colors = c(wesanderson::wes_palette(21, name = "Zissou1", type = "continuous")))
       
@@ -706,7 +706,7 @@ find_biomarkers <- function(data,
           Group_A <- df_prevalence %>%
             hilldiv::tss() %>%
             mutate(Sample = sample_data$Sample, .before = 1)  %>%
-            filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[1]]) %>%
+            filter(Sample %in% sample_data$Sample[sample_data[,exp_var] == Groups[1]]) %>%
             reshape2::melt() %>%
             mutate(presence= ifelse(value > prevalence_tolerance, 1,0)) %>%
             group_by(variable) %>%
@@ -722,7 +722,7 @@ find_biomarkers <- function(data,
           Group_B <- df_prevalence %>%
             hilldiv::tss() %>%
             mutate(Sample = sample_data$Sample, .before = 1)  %>%
-            filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[2]]) %>%
+            filter(Sample %in% sample_data$Sample[sample_data[,exp_var] == Groups[2]]) %>%
             reshape2::melt() %>%
             mutate(presence= ifelse(value > prevalence_tolerance, 1,0)) %>%
             group_by(variable) %>%
@@ -756,8 +756,8 @@ find_biomarkers <- function(data,
         ggrepel::geom_text_repel() +
         theme_minimal() +
         geom_abline(slope = 1, intercept = 0) +
-        xlim(0,length(sample_data$Sample[sample_data$Group == Groups[1]])) +
-        ylim(0,length(sample_data$Sample[sample_data$Group == Groups[2]])) +
+        xlim(0,length(sample_data$Sample[sample_data[,exp_var] == Groups[1]])) +
+        ylim(0,length(sample_data$Sample[sample_data[,exp_var] == Groups[2]])) +
         theme_ridges() +
         scale_color_gradientn(colors = c(wesanderson::wes_palette(21, name = "Zissou1", type = "continuous")))
       

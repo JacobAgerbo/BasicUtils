@@ -5,15 +5,15 @@
 
 # Define the function
 find_biomarkers <- function(data,
-                            sample_data,
-                            exp_var,
-                            datatype = c("logcpm", "relabu", "counts"), 
-                            method = c("GLM", "RF", "both"),
-                            top_biomarker=0.1,
-                            prevalence_tolerance=0.01){
-  cat(paste(green,"\n","Starting finding biomarkers","\n",reset, sep = ""))
-  pb <- txtProgressBar(min = 0, max = 100, style = 3)
-
+                                     sample_data,
+                                     exp_var,
+                                     datatype = c("logcpm", "relabu", "counts"), 
+                                     method = c("GLM", "RF", "both"),
+                                     top_biomarker=0.1,
+                                     prevalence_tolerance=0.01,
+                                     threads=2){
+  
+  
   #set variables
   exp_var = exp_var
   datatype = match.arg(datatype)
@@ -24,18 +24,22 @@ find_biomarkers <- function(data,
   red <- "\033[31m"
   green <- "\033[32m"
   reset <- "\033[0m"
+  cat(paste(green,"\n","Starting finding biomarkers","\n",reset, sep = ""))
+  pb <- txtProgressBar(min = 0, max = 100, style = 3)
   
   
   
   suppressWarnings({
     start_time <- Sys.time()  # Record the start time
-
+    
     #
     i=1
     setTxtProgressBar(pb, i)
     # Set dependencies
     suppressWarnings({ 
       suppressPackageStartupMessages(library(tidyverse))
+      suppressPackageStartupMessages(library(doParallel))
+      suppressPackageStartupMessages(library(future))
       suppressPackageStartupMessages(library(reshape2))
       suppressPackageStartupMessages(library(cowplot))
       suppressPackageStartupMessages(library(ggpubr))
@@ -45,6 +49,11 @@ find_biomarkers <- function(data,
       suppressPackageStartupMessages(library(caret))
       suppressPackageStartupMessages(library(wesanderson))
       suppressPackageStartupMessages(library(hilldiv))
+      
+      # get threads  
+      cl <- makePSOCKcluster(threads)
+      registerDoParallel(cl)
+      
       ## ggplot theme
       theme_ridges <- function(font_size = 14, font_family = "", line_size = .5, grid = TRUE, center_axis_labels = FALSE) {
         half_line <- font_size / 2
@@ -185,7 +194,7 @@ find_biomarkers <- function(data,
     setTxtProgressBar(pb, i)
     if (method == "GLM"){
       method.cap = "Generalized linear models (GLMs)"
-    
+      
       i=i+1
       setTxtProgressBar(pb, i)
       
@@ -289,34 +298,34 @@ find_biomarkers <- function(data,
       
       suppressWarnings({
         suppressMessages({  
-      Group_A <- df_prevalence %>%
-        hilldiv::tss() %>%
-        mutate(Sample = sample_data$Sample, .before = 1)  %>%
-        filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[1]]) %>%
-        reshape2::melt() %>%
-        mutate(presence= ifelse(value > prevalence_tolerance, 1,0)) %>%
-        group_by(variable) %>%
-        summarise(
-          prevalence = sum(presence)
-        )
-       })
+          Group_A <- df_prevalence %>%
+            hilldiv::tss() %>%
+            mutate(Sample = sample_data$Sample, .before = 1)  %>%
+            filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[1]]) %>%
+            reshape2::melt() %>%
+            mutate(presence= ifelse(value > prevalence_tolerance, 1,0)) %>%
+            group_by(variable) %>%
+            summarise(
+              prevalence = sum(presence)
+            )
+        })
       })
       i=i+1
       setTxtProgressBar(pb, i)
       
       suppressWarnings({
         suppressMessages({
-      Group_B <- df_prevalence %>%
-        hilldiv::tss() %>%
-        mutate(Sample = sample_data$Sample, .before = 1)  %>%
-        filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[2]]) %>%
-        reshape2::melt() %>%
-        mutate(presence= ifelse(value > prevalence_tolerance, 1,0)) %>%
-        group_by(variable) %>%
-        summarise(
-          prevalence = sum(presence)
-        )
-       })
+          Group_B <- df_prevalence %>%
+            hilldiv::tss() %>%
+            mutate(Sample = sample_data$Sample, .before = 1)  %>%
+            filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[2]]) %>%
+            reshape2::melt() %>%
+            mutate(presence= ifelse(value > prevalence_tolerance, 1,0)) %>%
+            group_by(variable) %>%
+            summarise(
+              prevalence = sum(presence)
+            )
+        })
       })
       i=i+1
       setTxtProgressBar(pb, i)
@@ -463,41 +472,41 @@ find_biomarkers <- function(data,
       
       suppressWarnings({
         suppressMessages({
-      Group_A <- df_prevalence %>%
-        hilldiv::tss() %>%
-        mutate(Sample = sample_data$Sample, .before = 1)  %>%
-        filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[1]]) %>%
-        reshape2::melt() %>%
-        mutate(presence= ifelse(value > prevalence_tolerance, 1,0)) %>%
-        group_by(variable) %>%
-        summarise(
-          prevalence = sum(presence)
-        )
-      })
+          Group_A <- df_prevalence %>%
+            hilldiv::tss() %>%
+            mutate(Sample = sample_data$Sample, .before = 1)  %>%
+            filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[1]]) %>%
+            reshape2::melt() %>%
+            mutate(presence= ifelse(value > prevalence_tolerance, 1,0)) %>%
+            group_by(variable) %>%
+            summarise(
+              prevalence = sum(presence)
+            )
+        })
       })
       i=i+1
       setTxtProgressBar(pb, i)
       
       suppressWarnings({
         suppressMessages({
-      Group_B <- df_prevalence %>%
-        hilldiv::tss() %>%
-        mutate(Sample = sample_data$Sample, .before = 1)  %>%
-        filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[2]]) %>%
-        reshape2::melt() %>%
-        mutate(presence= ifelse(value > prevalence_tolerance, 1,0)) %>%
-        group_by(variable) %>%
-        summarise(
-          prevalence = sum(presence)
-        )
-       })
+          Group_B <- df_prevalence %>%
+            hilldiv::tss() %>%
+            mutate(Sample = sample_data$Sample, .before = 1)  %>%
+            filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[2]]) %>%
+            reshape2::melt() %>%
+            mutate(presence= ifelse(value > prevalence_tolerance, 1,0)) %>%
+            group_by(variable) %>%
+            summarise(
+              prevalence = sum(presence)
+            )
+        })
       })
       i=i+1
       setTxtProgressBar(pb, i)
       
       prevalence_df <- full_join(Group_A,Group_B, by="variable")
       colnames(prevalence_df) <- c("Feature", "x", "y")
-    
+      
       i=i+1
       setTxtProgressBar(pb, i)
       
@@ -686,41 +695,41 @@ find_biomarkers <- function(data,
       
       # Prevalence plot
       suppressWarnings({
-      suppressMessages({  
-      
-        df_prevalence <- t(data) %>%
-        as_tibble()
-      
-      Groups <- unique(sample_data[,exp_var])
-      
-      
-      Group_A <- df_prevalence %>%
-        hilldiv::tss() %>%
-        mutate(Sample = sample_data$Sample, .before = 1)  %>%
-        filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[1]]) %>%
-        reshape2::melt() %>%
-        mutate(presence= ifelse(value > prevalence_tolerance, 1,0)) %>%
-        group_by(variable) %>%
-        summarise(
-          prevalence = sum(presence)
-        )
-       })
+        suppressMessages({  
+          
+          df_prevalence <- t(data) %>%
+            as_tibble()
+          
+          Groups <- unique(sample_data[,exp_var])
+          
+          
+          Group_A <- df_prevalence %>%
+            hilldiv::tss() %>%
+            mutate(Sample = sample_data$Sample, .before = 1)  %>%
+            filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[1]]) %>%
+            reshape2::melt() %>%
+            mutate(presence= ifelse(value > prevalence_tolerance, 1,0)) %>%
+            group_by(variable) %>%
+            summarise(
+              prevalence = sum(presence)
+            )
+        })
       })
       i=i+1
       setTxtProgressBar(pb, i)
       suppressWarnings({
         suppressMessages({
-      Group_B <- df_prevalence %>%
-        hilldiv::tss() %>%
-        mutate(Sample = sample_data$Sample, .before = 1)  %>%
-        filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[2]]) %>%
-        reshape2::melt() %>%
-        mutate(presence= ifelse(value > prevalence_tolerance, 1,0)) %>%
-        group_by(variable) %>%
-        summarise(
-          prevalence = sum(presence)
-        )
-       })
+          Group_B <- df_prevalence %>%
+            hilldiv::tss() %>%
+            mutate(Sample = sample_data$Sample, .before = 1)  %>%
+            filter(Sample %in% sample_data$Sample[sample_data$Group == Groups[2]]) %>%
+            reshape2::melt() %>%
+            mutate(presence= ifelse(value > prevalence_tolerance, 1,0)) %>%
+            group_by(variable) %>%
+            summarise(
+              prevalence = sum(presence)
+            )
+        })
       })
       i=i+1
       setTxtProgressBar(pb, i)
@@ -761,7 +770,7 @@ find_biomarkers <- function(data,
                                      prevalence_plot, 
                                      ncol = 1,
                                      labels = "AUTO")
-    
+      
       i=i+1
       setTxtProgressBar(pb, i)
       
@@ -772,6 +781,9 @@ find_biomarkers <- function(data,
     }
     
   })
+  ## stop parallels
+  stopCluster(cl)
+  
   end_time <- Sys.time()  # Record the end time
   elapsed_time <- end_time - start_time  # Calculate the elapsed time
   # Print the estimated remaining time
@@ -784,26 +796,8 @@ find_biomarkers <- function(data,
 
 # Make test data
 #set.seed(1234)
-#data1 <- matrix(rpois(10000, 50), nrow = 100)
-#data2 <- matrix(rpois(5000, 4), nrow = 50)
-#data31 <- matrix(rpois(50, 1000), nrow = 1)
-#data32 <- matrix(rpois(50, 1000), nrow = 1)
-#data33 <- matrix(rpois(50, 200), nrow = 1)
-#data41 <- matrix(rpois(50, 100), nrow = 1)
-#data42 <- matrix(rpois(50, 50), nrow = 1)
-#data43 <- matrix(rpois(50, 1000), nrow = 1)
-#data3 <- cbind(data31,data41)
-#data4 <- cbind(data32,data42)
-#data5 <- cbind(data33,data43)
-#data <- rbind(data3,data4,data5, data1, data2)
-#rm(data1, data2, data3, data4,data5)
-#rm(data31,data32,data33,data41,data42,data43)
-#colnames(data) <- c(paste0("Sample", 1:ncol(data)))
-#sample_data <- data.frame("Sample"= colnames(data),
-#                          "Group" = rep(c("GroupA", "GroupB"), each = 50))
 
-#df <- t(data) %>%
-#  as_tibble()
+
 
 #test <- find_biomarkers(data = data,
 #                            sample_data = sample_data,

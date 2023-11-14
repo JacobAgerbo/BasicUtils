@@ -366,7 +366,7 @@ find_biomarkers <- function(data,
                                      prevalence_plot, 
                                      ncol = 1,
                                      labels = "AUTO")
-      i=i+1
+      i=i+9
       setTxtProgressBar(pb, i)
       
       # Close progress bar
@@ -541,7 +541,7 @@ find_biomarkers <- function(data,
                                      ncol = 1,
                                      labels = "AUTO")
       
-      i=i+1
+      i=i+9
       setTxtProgressBar(pb, i)
       
       # Close progress bar
@@ -771,7 +771,7 @@ find_biomarkers <- function(data,
                                      ncol = 1,
                                      labels = "AUTO")
       
-      i=i+1
+      i=i+9
       setTxtProgressBar(pb, i)
       
       # Close progress bar
@@ -797,11 +797,12 @@ find_biomarkers <- function(data,
 # Make test data
 #set.seed(1234)
 
+#make_test_data <- source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_test_data.R")[["value"]]
+#test_data <-make_test_data(100)
 
-
-#test <- find_biomarkers(data = data,
-#                            sample_data = sample_data,
-#                            exp_var = "Group", 
+#test <- find_biomarkers(data = test_data$data,
+#                            sample_data = test_data$sample_data,
+#                            exp_var = "O_Group", 
 #                            datatype = "counts", 
 #                            method = "RF",
 #                            top_biomarker=0.1,

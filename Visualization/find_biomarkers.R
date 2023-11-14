@@ -1,7 +1,31 @@
 #!/usr/bin/env Rscript
 # R Script for Generating biomarkers, using random forrest or GLMnet (or both)
 # Author: Jacob Agerbo Rasmussen
-# Load necessary packages
+
+#' Biomarker detection using different classifiers
+#'
+#' @param data A multivariate matrix, like an abundance table
+#' @param sample_data The classification level used for feature
+#' @param exp_var A binary variable for classification from sample_data
+#' @param random_var Random variable, which should be taken into account for correlation, eg. 'Location' or 'batch effect'.
+#' @param datatype Select datatype, like relative abundance (relabu), counts, or logcpm
+#' @param top_biomarker percentage to filter most important biomarker in plot
+#' @param method Choose between Generalized Linear Models (GLMs), Random Forrest (RF), or both
+#' @param prevalence_tolerance tolerance for be counted as present in sample, when doing prevalence testing (default is 1/number of samples) 
+#' @return A ggplot object for pdf saving, and a table with statistics, and a plot of the trained model
+#'
+#' @examples
+#' make_test_data <- source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_test_data.R")[["value"]]
+#' test_data <-make_test_data(10)
+#' 
+#' p <- find_biomarkers(data = test_data$data,
+#'                           sample_data = test_data$sample_data,
+#'                           exp_var = "O_Group",
+#'                           datatype = "counts",
+#'                           method = "GLM",
+#'                           top_biomarker=0.1,
+#'                           prevalence_tolerance=NULL, threads = 4)
+#' p
 
 # Define the function
 find_biomarkers <- function(data,
@@ -13,6 +37,7 @@ find_biomarkers <- function(data,
                                      prevalence_tolerance=NULL,
                                      threads=2){
   
+
   
   #set variables
   exp_var = exp_var

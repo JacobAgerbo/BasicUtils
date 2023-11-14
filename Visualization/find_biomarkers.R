@@ -379,7 +379,7 @@ find_biomarkers <- function(data,
       elapsed_time <- end_time - start_time  # Calculate the elapsed time
       # Print the estimated remaining time
       cat(paste(green, "Success:", reset, "Operation completed successfully!\n"))
-      print("This job took:")
+      
       cat(paste("This job took:"))
       cat(paste(elapsed_time))
 
@@ -569,7 +569,7 @@ find_biomarkers <- function(data,
       elapsed_time <- end_time - start_time  # Calculate the elapsed time
       # Print the estimated remaining time
       cat(paste(green, "Success:", reset, "Operation completed successfully!\n"))
-      print("This job took:")
+      
       cat(paste("This job took:"))
       cat(paste(elapsed_time))  
       return(list(model = model.plot, table = importance_df, plot = out_plot))
@@ -811,7 +811,7 @@ find_biomarkers <- function(data,
       elapsed_time <- end_time - start_time  # Calculate the elapsed time
       # Print the estimated remaining time
       cat(paste(green, "Success:", reset, "Operation completed successfully!\n"))
-      print("This job took:")
+      
       cat(paste("This job took:"))
       cat(paste(elapsed_time))  
       return(list(model = model.plot, table = importance_df, plot = out_plot))

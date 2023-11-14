@@ -8,7 +8,7 @@
 #' @param sample_data The classification level used for feature
 #' @param exp_var A binary variable for classification from sample_data
 #' @param random_var Random variable, which should be taken into account for correlation, eg. 'Location' or 'batch effect'.
-#' @param datatype Select datatype, like relative abundance (relabu), counts, or logcpm
+#' @param datatype Select datatype, like relative abundance (relabu), counts, or log-transformed counts per million (logcpm)
 #' @param top_biomarker percentage to filter most important biomarker in plot
 #' @param method Choose between Generalized Linear Models (GLMs), Random Forrest (RF), or both
 #' @param prevalence_tolerance tolerance for be counted as present in sample, when doing prevalence testing (default is 1/number of samples) 

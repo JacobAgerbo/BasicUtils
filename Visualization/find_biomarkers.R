@@ -10,7 +10,7 @@ find_biomarkers <- function(data,
                                      datatype = c("logcpm", "relabu", "counts"), 
                                      method = c("GLM", "RF", "both"),
                                      top_biomarker=0.1,
-                                     prevalence_tolerance=0.01,
+                                     prevalence_tolerance=NULL,
                                      threads=2){
   
   
@@ -294,6 +294,10 @@ find_biomarkers <- function(data,
       df_prevalence <- t(data) %>%
         as_tibble()
       
+      if (is.null(prevalence_tolerance)){
+        prevalence_tolerance <- as.numeric(1 / ncol(data))
+      }      
+      
       Groups <- unique(sample_data[,exp_var])
       
       suppressWarnings({
@@ -371,7 +375,14 @@ find_biomarkers <- function(data,
       
       # Close progress bar
       close(pb)
-      
+      end_time <- Sys.time()  # Record the end time
+      elapsed_time <- end_time - start_time  # Calculate the elapsed time
+      # Print the estimated remaining time
+      cat(paste(green, "Success:", reset, "Operation completed successfully!\n"))
+      print("This job took:")
+      cat(paste("This job took:"))
+      cat(paste(elapsed_time))
+
       return(list(model = model.plot, table = importance_df, plot = out_plot))
       
     } else if (method == "RF"){
@@ -468,10 +479,18 @@ find_biomarkers <- function(data,
       # Prevalence plot
       df_prevalence <- t(data) %>%
         as_tibble()
+
+      if (is.null(prevalence_tolerance)){
+        prevalence_tolerance <- as.numeric(1 / ncol(data))
+      } 
+        
       Groups <- unique(sample_data[,exp_var])
       
       suppressWarnings({
         suppressMessages({
+
+
+
           Group_A <- df_prevalence %>%
             hilldiv::tss() %>%
             mutate(Sample = sample_data$Sample, .before = 1)  %>%
@@ -546,7 +565,13 @@ find_biomarkers <- function(data,
       
       # Close progress bar
       close(pb)
-      
+      end_time <- Sys.time()  # Record the end time
+      elapsed_time <- end_time - start_time  # Calculate the elapsed time
+      # Print the estimated remaining time
+      cat(paste(green, "Success:", reset, "Operation completed successfully!\n"))
+      print("This job took:")
+      cat(paste("This job took:"))
+      cat(paste(elapsed_time))  
       return(list(model = model.plot, table = importance_df, plot = out_plot))
       
       
@@ -700,6 +725,11 @@ find_biomarkers <- function(data,
           df_prevalence <- t(data) %>%
             as_tibble()
           
+      if (is.null(prevalence_tolerance)){
+        prevalence_tolerance <- as.numeric(1 / ncol(data))
+      }
+
+
           Groups <- unique(sample_data[,exp_var])
           
           
@@ -777,6 +807,13 @@ find_biomarkers <- function(data,
       # Close progress bar
       close(pb)
       #
+      end_time <- Sys.time()  # Record the end time
+      elapsed_time <- end_time - start_time  # Calculate the elapsed time
+      # Print the estimated remaining time
+      cat(paste(green, "Success:", reset, "Operation completed successfully!\n"))
+      print("This job took:")
+      cat(paste("This job took:"))
+      cat(paste(elapsed_time))  
       return(list(model = model.plot, table = importance_df, plot = out_plot))
     }
     
@@ -784,13 +821,7 @@ find_biomarkers <- function(data,
   ## stop parallels
   stopCluster(cl)
   
-  end_time <- Sys.time()  # Record the end time
-  elapsed_time <- end_time - start_time  # Calculate the elapsed time
-  # Print the estimated remaining time
-  cat(paste(green, "Success:", reset, "Operation completed successfully!\n"))
-  print("This job took:")
-  cat(paste("This job took:"))
-  cat(paste(elapsed_time))  
+  
 }
 
 

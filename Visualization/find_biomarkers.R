@@ -382,7 +382,7 @@ find_biomarkers <- function(data,
       cat(paste(green, "Success:", reset, "Operation completed successfully!\n"))
       cat(paste("\n"))
       cat(paste("This job took: "))
-      cat(paste(elapsed_time, "seconds", sep= ""))  
+      cat(paste(elapsed_time, " seconds ", sep= ""))  
 
       return(list(model = model.plot, table = importance_df, plot = out_plot))
       
@@ -572,7 +572,7 @@ find_biomarkers <- function(data,
       cat(paste(green, "Success:", reset, "Operation completed successfully!\n"))
       cat(paste("\n"))
       cat(paste("This job took: "))
-      cat(paste(elapsed_time, "seconds", sep= ""))  
+      cat(paste(elapsed_time, " seconds ", sep= ""))  
       
       return(list(model = model.plot, table = importance_df, plot = out_plot))
       
@@ -816,7 +816,7 @@ find_biomarkers <- function(data,
       cat(paste(green, "Success:", reset, "Operation completed successfully!\n"))
       cat(paste("\n"))
       cat(paste("This job took: "))
-      cat(paste(elapsed_time, "seconds", sep= ""))  
+      cat(paste(elapsed_time, " seconds ", sep= ""))  
       return(list(model = model.plot, table = importance_df, plot = out_plot))
     }
     

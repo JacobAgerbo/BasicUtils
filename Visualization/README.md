@@ -95,5 +95,5 @@ generate_boxplot(data = data,
                  jitter = FALSE, 
                  palette = "Dark2")
 ```
-![alt text](Figures/iNEXT_plot.png)
+![alt text](Figures/Boxplot_figure.png)
 

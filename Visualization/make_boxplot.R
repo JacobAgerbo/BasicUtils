@@ -132,7 +132,7 @@ generate_boxplot <- function(data,
   
   if (isTRUE(jitter)) {
     boxplot <- boxplot +
-      geom_jitter(alpha = 0.5)
+      geom_jitter(fill = group, alpha = 0.25)
   }  
 
   

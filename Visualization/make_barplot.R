@@ -85,7 +85,9 @@ make_barplot <- function(data = data,
                                  
                                }
 
-          plot <- plot + scale_fill_manual(values = palette)
+          plot <- plot + scale_fill_manual(values = palette) +
+          theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
 
           return(plot)
                                        

@@ -4,7 +4,7 @@
 # Load necessary packages
 
 # Define the function
-make_collectors_curves <- function(data, sample_data = NULL group_var = NULL, interations = 5, threads = 2){
+make_collectors_curves <- function(data, sample_data = NULL, group_var = NULL, interations = 5, threads = 2){
   suppressWarnings({ 
     suppressPackageStartupMessages(library(tidyverse, quietly = TRUE,
             warn.conflicts = FALSE))

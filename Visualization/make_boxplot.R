@@ -5,6 +5,7 @@
 
 # Define a function to generate a boxplot
 generate_boxplot <- function(data, 
+                            sample_data = NULL,
                              group_var=NULL, 
                              plot_title=NULL, 
                              palette="Dark2", 
@@ -22,7 +23,7 @@ generate_boxplot <- function(data,
   # Read data
   # Add group variable if provided
   if (!is.null(group_var)) {
-    data$group <- group_var
+    data$group <- sample_data[,group_var]
   }
   
 

@@ -85,7 +85,7 @@ make_barplot <- function(data = data,
                                  
                                }
 
-          plot <- plot + scale_color_manual(values = palette)
+          plot <- plot + scale_fill_manual(values = palette)
 
           return(plot)
                                        

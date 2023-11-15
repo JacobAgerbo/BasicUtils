@@ -54,7 +54,16 @@ sample_data <- data_list$sample_data
 ### Collector's curves
 
 ```
+# get function
 source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_collectors_curves.R")
 
+# generate collector's curves
+make_collectors_curves(data = data, interations = 20)
+```
+![alt text](http://url/to/img.png)
+### Sample-size based extrapolation of richness in data
+This is based on the iNEXT *R package*
+
+```
 
 ```

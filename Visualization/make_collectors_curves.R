@@ -160,7 +160,11 @@ make_collectors_curves <- function(data, interations = 5, threads = 2){
   
 
  ## stop parallels
-  suppressWarnings({ stopCluster(cl)})     
+  suppressWarnings({
+    suppressMessages({
+      stopCluster(cl)})
+    })
+    
 }
 
 # Example usage

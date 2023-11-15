@@ -7,6 +7,8 @@ do_iNEXT <- function(data, sample_data = NULL, group_var = NULL, table=FALSE) {
   #Load dependencies
   suppressPackageStartupMessages(library(tidyverse))
   suppressPackageStartupMessages(library(iNEXT))
+  suppressPackageStartupMessages(library(ggtext))
+  suppressPackageStartupMessages(library(ggpubr))
   # Calculate iNEXT diversity
   # Add group variable if provided
   suppressWarnings({if (!is.null(group_var)) {

@@ -80,9 +80,20 @@ Generate boxplots across different group. Here you can add statistics. Homogenei
 ```
 # get function
 source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_boxplot.R")
+# generate 50x100 matrix of random data for the first half
+first_half <- matrix(rnorm(5000, mean = 10, sd = 1.2), nrow = 100, ncol = 50)
+# generate 50x100 matrix of random data for the second half
+second_half <- matrix(rnorm(5000, mean = 5, sd = .2), nrow = 100, ncol = 50)
 
-# generate iNEXT figure
-do_iNEXT(data = data, sample_data = sample_data, group_var = "O_Group")
+# combine the two halves vertically
+data <- cbind(first_half, second_half)
+generate_boxplot(data = data, 
+                 sample_data = sample_data, 
+                 group_var = "O_Group", 
+                 test = TRUE, 
+                 violin = FALSE, 
+                 jitter = FALSE, 
+                 palette = "Dark2")
 ```
 ![alt text](Figures/iNEXT_plot.png)
 

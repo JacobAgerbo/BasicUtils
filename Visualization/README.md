@@ -20,9 +20,12 @@ Main functions includes preprocessing multi-variate data from omics, such as fil
 
 - **Composition of features, using barplots**: A function for generating the barplot, which always are used in microbiome studies. Here you can group samples per group, if you like.
 
-- **Linaer mixed effect models**: If you know, you know.
-
 - **Principal component analysis (PCA)**: If you know, you know.
+
+- **Biomarker predictions, using GLMs or fancy RF**: If you know, you know.
+  
+- **Linear mixed effect models**: If you know, you know.
+
 
 
 ## Tutorial

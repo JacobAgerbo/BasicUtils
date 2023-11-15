@@ -27,7 +27,9 @@ make_barplot <- function(data = data,
                                suppressPackageStartupMessages(library(ggpubr))
                                suppressPackageStartupMessages(library(ggplot2))
                                suppressPackageStartupMessages(library(hilldiv))
-                               
+                               # set colors
+                               source("https://raw.githubusercontent.com/david-barnett/microViz/11cdd447c4e7d59a75f7194b249f4ddb1b942867/R/distinct_palette.R")
+                               palette <- distinct_palette(10, pal = "kelly", add = "grey90")
                                if (!is.null(tax_data)) {
                                  if (is.null(taxa)) {
                                    cat(paste(red, "Whoops!", reset, "Please add a taxonomic group, using the taxa parameter!\n"))
@@ -82,6 +84,9 @@ make_barplot <- function(data = data,
                                    ggplot(aes(x = Var2, y = value, fill = Var1)) + geom_bar(stat = "identity")
                                  
                                }
+
+          plot + scale_color_manual(values = palette)
+
           return(plot)
                                        
         })

@@ -77,9 +77,8 @@ do_iNEXT(data = data, sample_data = sample_data, group_var = "O_Group")
 ### Boxplots and statistical comparison of groups
 Generate boxplots across different group. Here you can add statistics. Homogeneity will automatically be tested and will be basis for parametric or non-parametric test.
 
+Here I will just generate some nominal normal distributed data, which is better for this purpose.
 ```
-# get function
-source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_boxplot.R")
 # generate 50x100 matrix of random data for the first half
 first_half <- matrix(rnorm(5000, mean = 10, sd = 1.2), nrow = 100, ncol = 50)
 # generate 50x100 matrix of random data for the second half
@@ -87,13 +86,33 @@ second_half <- matrix(rnorm(5000, mean = 5, sd = .2), nrow = 100, ncol = 50)
 
 # combine the two halves vertically
 data <- cbind(first_half, second_half)
+```
+But same procedure. Get function and launch. :) 
+
+```
+# get function
+source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_boxplot.R")
+
 generate_boxplot(data = data, 
                  sample_data = sample_data, 
                  group_var = "O_Group", 
                  test = TRUE, 
                  violin = FALSE, 
                  jitter = FALSE, 
-                 palette = "Dark2")
+                 palette = "Dark2") # Dark2 is the default palette
 ```
 ![alt text](Figures/Boxplot_figure.png)
 
+### Composition of features, using barplots
+```
+# get function
+source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_barplot.R")
+
+generate_boxplot(data = data, 
+                 sample_data = sample_data, 
+                 group_var = "O_Group", 
+                 test = TRUE, 
+                 violin = FALSE, 
+                 jitter = FALSE, 
+                 palette = "Dark2") # Dark2 is the default palette
+```

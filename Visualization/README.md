@@ -105,14 +105,38 @@ generate_boxplot(data = data,
 
 ### Composition of features, using barplots
 ```
+# generate some taxa data 
+tax_data <- data.frame("Phylum"= c(rep(c("PhyA", "PhyB", "PhyC", "PhyD", "PhyE"), each = 20),rep(c("PhyA", "PhyB", "PhyC"), each = 1)),
+                      "Order"= c(rep(c("OrdA", "OrdB", "OrdC", "OrdD", "OrdE"), each = 20), rep(c("OrdA", "OrdB", "OrdC"), each = 1)),
+                      "Class"= c(rep(c("ClassA", "ClassB", "ClassC", "ClassD", "ClassE"), each = 20),rep(c("ClassA", "ClassB", "ClassC"), each = 1)),
+                      "Family"= c(rep(c("FamA", "FamB", "FamC", "FamD", "FamE"), each = 20),rep(c("FamA", "FamB", "FamC"), each = 1)),
+                      "Genus"= c(rep(c("GenA", "GenB", "GenC", "GenD", "GenE", "GenF", "GenG", "GenH", "GenI",  NA), each = 10),rep(c("GenA", "GenB", "GenC"), each = 1)))
+```
+
+First lets make a barplot, where we group samples
+```
 # get function
 source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_barplot.R")
 
-generate_boxplot(data = data, 
-                 sample_data = sample_data, 
-                 group_var = "O_Group", 
-                 test = TRUE, 
-                 violin = FALSE, 
-                 jitter = FALSE, 
-                 palette = "Dark2") # Dark2 is the default palette
+make_barplot(data = data,
+                        sample_data = sample_data,
+                        tax_data = tax_data,
+                        taxa = "Genus",
+                        grouping = TRUE, group = "Group")
 ```
+![alt text](Figures/Barplot_Group.png)
+
+But this can also be done on samples, by changing `grouping=FALSE`, which is default.
+
+```
+# get function
+source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_barplot.R")
+
+make_barplot(data = data,
+                        sample_data = sample_data,
+                        tax_data = tax_data,
+                        taxa = "Genus",
+                        grouping = FALSE, group = "Group")
+```
+![alt text](Figures/Barplot_sample.png)
+

@@ -3,12 +3,19 @@
 # Author: Jacob Agerbo Rasmussen
 
 # Define function to create iNEXT figure
-do_iNEXT <- function(data, sample_data = NULL, group_var = NULL, table=FALSE) {
+do_iNEXT <- function(data, sample_data = NULL, group_var = NULL, table=FALSE, threads=2) {
   #Load dependencies
   suppressPackageStartupMessages(library(tidyverse))
   suppressPackageStartupMessages(library(iNEXT))
   suppressPackageStartupMessages(library(ggtext))
   suppressPackageStartupMessages(library(ggpubr))
+  suppressPackageStartupMessages(library(doParallel))
+  suppressPackageStartupMessages(library(future))
+
+  # get threads  
+    cl <- makePSOCKcluster(threads)
+    registerDoParallel(cl)
+
   # Calculate iNEXT diversity
   # Add group variable if provided
   suppressWarnings({if (!is.null(group_var)) {
@@ -88,5 +95,6 @@ do_iNEXT <- function(data, sample_data = NULL, group_var = NULL, table=FALSE) {
     # Code to be executed if condition is false
     return(list(plot = plot))
   }
-  
+ ## stop parallels
+  stopCluster(cl) 
 }

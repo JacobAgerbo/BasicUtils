@@ -52,7 +52,7 @@ sample_data <- data_list$sample_data
 ```
 
 ### Collector's curves
-
+Here we produce collector's curves for four random samples. Using random subsampling 20 times. The bold black line indicates the mean of all subsampling.
 ```
 # get function
 source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_collectors_curves.R")
@@ -60,10 +60,29 @@ source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualiza
 # generate collector's curves
 make_collectors_curves(data = data, interations = 20)
 ```
-![alt text](http://url/to/img.png)
+![alt text](Figures/Collectors_curves.png)
+
 ### Sample-size based extrapolation of richness in data
 This is based on the iNEXT *R package*
 
 ```
+# get function
+source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_iNEXT.R")
+
+# generate iNEXT figure
+do_iNEXT(data = data, sample_data = sample_data, group_var = "O_Group")
+```
+![alt text](Figures/iNEXT_plot.png)
+
+### Boxplots and statistical comparison of groups
+Generate boxplots across different group. Here you can add statistics. Homogeneity will automatically be tested and will be basis for parametric or non-parametric test.
 
 ```
+# get function
+source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_boxplot.R")
+
+# generate iNEXT figure
+do_iNEXT(data = data, sample_data = sample_data, group_var = "O_Group")
+```
+![alt text](Figures/iNEXT_plot.png)
+

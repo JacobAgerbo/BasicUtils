@@ -4,7 +4,7 @@
 # Load required libraries
 
 # Define a function to generate a boxplot
-generate_boxplot <- function(data, 
+generate_boxplot <- function(data,
                             sample_data = NULL,
                              group_var=NULL, 
                              plot_title=NULL, 
@@ -23,7 +23,11 @@ generate_boxplot <- function(data,
   # Read data
   # Add group variable if provided
   if (!is.null(group_var)) {
-    data$group <- sample_data[,group_var]
+    #data$group <- sample_data[,group_var]
+    data <- data %>%
+    t() %>%
+    as_tibble() %>%
+    mutate(group = sample_data[,group_var], .before = 1)
   }
   
 

@@ -17,9 +17,6 @@ make_collectors_curves <- function(data, interations = 5, threads = 2){
     cl <- makePSOCKcluster(threads)
     registerDoParallel(cl)
 
-    sample_data = NULL
-    group_var = NULL
-
     theme_ridges <- function(font_size = 14, font_family = "", line_size = .5, grid = TRUE, center_axis_labels = FALSE) {
       half_line <- font_size / 2
       small_rel <- 0.857

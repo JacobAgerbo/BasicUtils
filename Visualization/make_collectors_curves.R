@@ -4,7 +4,7 @@
 # Load necessary packages
 
 # Define the function
-generate_plots <- function(data, group_var, interations = 5) {
+make_collectors_curves <- function(data, group_var, interations = 5) {
   suppressWarnings({ 
     suppressPackageStartupMessages(library(tidyverse, quietly = TRUE,
             warn.conflicts = FALSE))

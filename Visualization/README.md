@@ -46,3 +46,15 @@ sample_data <- data_list$sample_data
 ```
 
 ### Preprocessing
+
+```
+
+```
+
+### Collector's curves
+
+```
+source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_collectors_curves.R")
+
+
+```

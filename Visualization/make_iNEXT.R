@@ -25,7 +25,7 @@ do_iNEXT <- function(data, sample_data = NULL, group_var = NULL, table=FALSE, th
       as_tibble()
     
     # Aggregate rows of iNEXT.table by summing values across each row
-    colnames(data) <- sample_data$Group
+    colnames(data) <- sample_data[,group_var]
     data.agg <- as.matrix(aggregate(t(data), list(rownames(t(data))), FUN = "sum", na.rm = TRUE))
     data.agg <- t(data.agg)
     colnames(data.agg) <- data.agg[1,]

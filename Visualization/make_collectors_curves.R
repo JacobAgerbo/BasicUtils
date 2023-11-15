@@ -4,7 +4,7 @@
 # Load necessary packages
 
 # Define the function
-make_collectors_curves <- function(data, sample_data = NULL, group_var = NULL, interations = 5, threads = 2){
+make_collectors_curves <- function(data, interations = 5, threads = 2){
   suppressWarnings({ 
     suppressPackageStartupMessages(library(tidyverse, quietly = TRUE,
             warn.conflicts = FALSE))
@@ -154,8 +154,9 @@ make_collectors_curves <- function(data, sample_data = NULL, group_var = NULL, i
   }
   
   # Return the list of plots
+  plot <- cowplot::plot_grid(plot_list[[1]],plot_list[[2]],plot_list[[3]],plot_list[[4]], ncol = 2)
   
-  plot_list
+  return(plot)
   
 
  ## stop parallels

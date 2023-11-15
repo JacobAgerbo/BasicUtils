@@ -78,7 +78,7 @@ make_barplot <- function(data = data,
                                  
                                } else {
                                  
-                                 data %>% 
+                                 plot <- data %>% 
                                    hilldiv::tss() %>%
                                    reshape2::melt() %>%
                                    ggplot(aes(x = Var2, y = value, fill = Var1)) + geom_bar(stat = "identity")

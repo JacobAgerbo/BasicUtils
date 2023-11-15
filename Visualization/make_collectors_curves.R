@@ -4,7 +4,7 @@
 # Load necessary packages
 
 # Define the function
-make_collectors_curves <- function(data, group_var, interations = 5, threads = 2){
+make_collectors_curves <- function(data, sample_data = NULL group_var = NULL, interations = 5, threads = 2){
   suppressWarnings({ 
     suppressPackageStartupMessages(library(tidyverse, quietly = TRUE,
             warn.conflicts = FALSE))
@@ -16,6 +16,9 @@ make_collectors_curves <- function(data, group_var, interations = 5, threads = 2
       # get threads  
     cl <- makePSOCKcluster(threads)
     registerDoParallel(cl)
+
+    sample_data = NULL
+    group_var = NULL
 
     theme_ridges <- function(font_size = 14, font_family = "", line_size = .5, grid = TRUE, center_axis_labels = FALSE) {
       half_line <- font_size / 2

@@ -4,12 +4,19 @@
 # Load necessary packages
 
 # Define the function
-make_collectors_curves <- function(data, group_var, interations = 5) {
+make_collectors_curves <- function(data, group_var, interations = 5, threads = 2){
   suppressWarnings({ 
     suppressPackageStartupMessages(library(tidyverse, quietly = TRUE,
             warn.conflicts = FALSE))
     suppressPackageStartupMessages(library(reshape2))
     suppressPackageStartupMessages(library(cowplot))
+    suppressPackageStartupMessages(library(doParallel))
+    suppressPackageStartupMessages(library(future))
+
+      # get threads  
+    cl <- makePSOCKcluster(threads)
+    registerDoParallel(cl)
+
     theme_ridges <- function(font_size = 14, font_family = "", line_size = .5, grid = TRUE, center_axis_labels = FALSE) {
       half_line <- font_size / 2
       small_rel <- 0.857
@@ -144,9 +151,12 @@ make_collectors_curves <- function(data, group_var, interations = 5) {
   }
   
   # Return the list of plots
-  pdf(paste(group_var, '.pdf', sep=""), width=8, height=8)
-    plot_list
-    dev.off()
+  
+  plot_list
+  
+
+ ## stop parallels
+  stopCluster(cl)     
 }
 
 # Example usage

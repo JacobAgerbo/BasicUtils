@@ -59,8 +59,7 @@
   
   
   # Return the plot
-  
-  return(pca_plot)
+    return(pca_plot)
   
 }
 

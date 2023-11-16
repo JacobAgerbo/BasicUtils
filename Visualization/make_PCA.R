@@ -22,7 +22,6 @@
 
   # Add group variable if provided
   if (!is.null(group_var)) {
-    #data$group <- sample_data[,group_var]
     pca_df <- pca_df %>%
     t() %>%
     as_tibble() %>%

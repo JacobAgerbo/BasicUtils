@@ -159,4 +159,34 @@ generate_pca_plot(data, sample_data = sample_data, group_var = "O_Group", method
                   plot_title = "PCA Plot", scale = TRUE)
 
 ```
-![alt text](Figures/Barplot_sample.png)
+![alt text](Figures/PCA_plot.png)
+
+
+### Biomarker predictions, using GLMs or fancy RF
+
+```
+# get function
+source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_PCA.R")
+
+biomarkers <- find_biomarkers(data = test_data$data,
+                           sample_data = test_data$sample_data,
+                           exp_var = "O_Group",
+                           datatype = "counts",
+                           method = "both",
+                           top_biomarker=0.1,
+                           prevalence_tolerance=0.01,
+                           threads=2)
+
+
+# plot the overall biomarker plot, with important of biomarkers, AUC/ROC curves, and prevalence of features betweeen groups.
+
+biomarkers$plot
+```
+![alt text](Figures/Biomarker_plot.png)
+
+This function is able to be multi-threaded to increase speed. Therefore I made a small benchmark on my laptop. To see increase of speed for classifiers, using multiple threads. Default is `threads=2`.
+
+![alt text](Figures/Biomarker_time_benchmark.png)
+
+
+

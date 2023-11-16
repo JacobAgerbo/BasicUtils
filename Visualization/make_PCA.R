@@ -3,7 +3,7 @@
 # Author: Jacob Agerbo Rasmussen
 # Load necessary packages
 # Function to generate PCA plot
- generate_pca_plot <- function(data, group_var = NULL, method = "euclidean", 
+ generate_pca_plot <- function(data, sample_data = NULL, group_var = NULL, method = "euclidean", 
                                palette = "Dark2", alpha = 0.75, lg.position = "bottom", plot.centroids = FALSE,
                                plot_title = "PCA Plot") {
                               
@@ -22,7 +22,11 @@
 
   # Add group variable if provided
   if (!is.null(group_var)) {
-    pca_df$group <- group_var
+    #data$group <- sample_data[,group_var]
+    pca_df <- pca_df %>%
+    t() %>%
+    as_tibble() %>%
+    mutate(group = sample_data[,group_var], .before = 1)
   }
   
   # Create PCA plot using ggplot

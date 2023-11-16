@@ -143,3 +143,16 @@ make_barplot(data = data,
 ```
 ![alt text](Figures/Barplot_sample.png)
 
+### Composition analysis, using Principal component analysis (PCA)
+
+```
+# get function
+source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_PCA.R")
+
+generate_pca_plot(data = data,
+                        sample_data = sample_data,
+                        tax_data = tax_data,
+                        taxa = "Genus",
+                        grouping = FALSE, group = "Group")
+```
+![alt text](Figures/Barplot_sample.png)

@@ -13,7 +13,7 @@
      theme_ridges <- source("https://raw.githubusercontent.com/wilkelab/ggridges/master/R/theme.R")
    })
   # Perform PCA
-  dist_df <- dist(data, method = method)
+  dist_df <- dist(t(data), method = method)
   pca <- prcomp(dist_df, scale. = scale)
   pca_df <- as.data.frame(pca$x)
   
@@ -23,7 +23,6 @@
   # Add group variable if provided
   if (!is.null(group_var)) {
     pca_df <- pca_df %>%
-    t() %>%
     as_tibble() %>%
     mutate(group = sample_data[,group_var], .before = 1)
   }

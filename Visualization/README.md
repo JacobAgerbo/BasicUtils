@@ -184,9 +184,24 @@ biomarkers$plot
 ```
 ![alt text](Figures/Biomarker_plot.png)
 
+You can also get a table for importance of your predictors.
+```
+biomarkers$table
+```
+
+| biomarker | importance | Type                     |
+|-----------|------------|--------------------------|
+| RF V2     | 86.103596  | Random Forrest           |
+| RF V1     | 88.053099  | Random Forrest           |
+| RF V3     | 100.000000 | Random Forrest           |
+| GLM V2    | 67.029617  | Generalised Linear Model |
+| GLM V1    | 70.828322  | Generalised Linear Model |
+| GLM V3    | 78.778166  | Generalised Linear Model |
+
 This function is able to be multi-threaded to increase speed. Therefore I made a small benchmark on my laptop. To see increase of speed for classifiers, using multiple threads. Default is `threads=2`.
 
 ![alt text](Figures/Biomarker_time_benchmark.png)
 
 
+### Linear mixed effect models
 

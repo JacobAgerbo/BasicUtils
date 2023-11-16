@@ -51,7 +51,7 @@
                                           fill = group),
                                       shape=18,
                                       alpha = 0.85,
-                                      size = 7.5) +
+                                      size = 12.5) +
       scale_fill_brewer(palette = palette)
   }
   

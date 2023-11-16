@@ -96,6 +96,7 @@ But same procedure. Get function and launch. :)
 # get function
 source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_boxplot.R")
 
+# generate boxplots
 generate_boxplot(data = data, 
                  sample_data = sample_data, 
                  group_var = "O_Group", 
@@ -121,6 +122,7 @@ First lets make a barplot, where we group samples
 # get function
 source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_barplot.R")
 
+# generate barplots
 make_barplot(data = data,
                         sample_data = sample_data,
                         tax_data = tax_data,
@@ -135,11 +137,12 @@ But this can also be done on samples, by changing `grouping=FALSE`, which is def
 # get function
 source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_barplot.R")
 
+# generate barplots, which are sample-based.
 make_barplot(data = data,
                         sample_data = sample_data,
                         tax_data = tax_data,
                         taxa = "Genus",
-                        grouping = FALSE, group = "Group")
+                        grouping = FALSE)
 ```
 ![alt text](Figures/Barplot_sample.png)
 
@@ -149,10 +152,11 @@ make_barplot(data = data,
 # get function
 source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_PCA.R")
 
-generate_pca_plot(data = data,
-                        sample_data = sample_data,
-                        tax_data = tax_data,
-                        taxa = "Genus",
-                        grouping = FALSE, group = "Group")
+generate_pca_plot(data, sample_data = sample_data, group_var = "O_Group", method = "euclidean", 
+                  palette = "Dark2", alpha = 0.75, 
+                  lg.position = "bottom", 
+                  plot.centroids = TRUE,
+                  plot_title = "PCA Plot", scale = TRUE)
+
 ```
 ![alt text](Figures/Barplot_sample.png)

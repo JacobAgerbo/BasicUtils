@@ -5,7 +5,7 @@
 # Function to generate PCA plot
  generate_pca_plot <- function(data, sample_data = NULL, group_var = NULL, method = "euclidean", 
                                palette = "Dark2", alpha = 0.75, lg.position = "bottom", plot.centroids = FALSE,
-                               plot_title = "PCA Plot") {
+                               plot_title = "PCA Plot", scale = TRUE) {
                               
    suppressWarnings({ 
      library(tidyverse, quietly = TRUE,
@@ -14,7 +14,7 @@
    })
   # Perform PCA
   dist_df <- dist(data, method = method)
-  pca <- prcomp(data, scale. = TRUE)
+  pca <- prcomp(dist_df, scale. = scale)
   pca_df <- as.data.frame(pca$x)
   
   # Get variance explained by each PC

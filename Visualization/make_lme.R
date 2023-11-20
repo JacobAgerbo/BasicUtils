@@ -4,7 +4,7 @@
 # Load necessary packages
 
 lme_cor <- function(data, 
-                    sam_table,
+                    sample_data,
                     feature, 
                     exp_var, 
                     random_var, 
@@ -20,7 +20,7 @@ lme_cor <- function(data,
   suppressPackageStartupMessages(library(broom.mixed))
   suppressPackageStartupMessages(library(ggplot2))
   
-  sam_table = sam_table
+  sam_table = sample_data
   exp_var = exp_var
   random_var = random_var
   datatype = match.arg(datatype)

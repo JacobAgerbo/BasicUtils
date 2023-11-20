@@ -233,6 +233,6 @@ Get the correlation statistics for the mixed effect
 lme_cor$stats
 ```
 
-| Random Effect Adjusted Correlation | p-value       |
+| Random Effect Adjusted Correlation| p-value       |
 |-----------------------------------|---------------|
 | -0.1917976265                     | 0.0009048458  |

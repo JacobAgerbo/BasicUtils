@@ -38,7 +38,7 @@ source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualiza
 # Make data
 data_list <- make_test_data(100)
 # Export from list to datasets
-data <- data_list$data
+abundance_data <- data_list$data
 sample_data <- data_list$sample_data
 ```
 
@@ -97,7 +97,7 @@ But same procedure. Get function and launch. :)
 source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_boxplot.R")
 
 # generate boxplots
-generate_boxplot(data = data, 
+generate_boxplot(data = abundance_data, 
                  sample_data = sample_data, 
                  group_var = "O_Group", 
                  test = TRUE, 
@@ -123,7 +123,7 @@ First lets make a barplot, where we group samples
 source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_barplot.R")
 
 # generate barplots
-make_barplot(data = data,
+make_barplot(data = abundance_data,
                         sample_data = sample_data,
                         tax_data = tax_data,
                         taxa = "Genus",
@@ -138,7 +138,7 @@ But this can also be done on samples, by changing `grouping=FALSE`, which is def
 source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_barplot.R")
 
 # generate barplots, which are sample-based.
-make_barplot(data = data,
+make_barplot(data = abundance_data,
                         sample_data = sample_data,
                         tax_data = tax_data,
                         taxa = "Genus",
@@ -152,7 +152,10 @@ make_barplot(data = data,
 # get function
 source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_PCA.R")
 
-generate_pca_plot(data, sample_data = sample_data, group_var = "O_Group", method = "euclidean", 
+generate_pca_plot(data = abundance_data, 
+                sample_data = sample_data, 
+                group_var = "O_Group", 
+                method = "euclidean", 
                   palette = "Dark2", alpha = 0.75, 
                   lg.position = "bottom", 
                   plot.centroids = TRUE,
@@ -168,8 +171,8 @@ generate_pca_plot(data, sample_data = sample_data, group_var = "O_Group", method
 # get function
 source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_PCA.R")
 
-biomarkers <- find_biomarkers(data = test_data$data,
-                           sample_data = test_data$sample_data,
+biomarkers <- find_biomarkers(data = abundance_data,
+                           sample_data = sample_data,
                            exp_var = "O_Group",
                            datatype = "counts",
                            method = "both",
@@ -205,3 +208,31 @@ This function is able to be multi-threaded to increase speed. Therefore I made a
 
 ### Linear mixed effect models
 
+```
+# get function
+source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_lme.R")
+
+# run function
+lme_cor <- make_lme_cor(data=abundance_data,
+                   sample_data =sample_data,
+                   feature="F1",
+                   exp_var = "Treatment",
+                   random_var = "Group",
+                   datatype = "counts",
+                   tolerance = 0.01)
+```
+
+Get the output plot. 
+```
+lme_cor$plot
+```
+![alt text](Figures/make_lme_cor.png)
+
+Get the correlation statistics for the mixed effect 
+```
+lme_cor$stats
+```
+
+| Random Effect Adjusted Correlation | p-value       |
+|-----------------------------------|---------------|
+| -0.1917976265                     | 0.0009048458  |

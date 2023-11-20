@@ -102,9 +102,9 @@ lme_cor <- function(data,
   df <- df %>% 
     dplyr::select(feature) %>% 
     # duplicate species variable for coloring & grouping ---
-    mutate(exp_var = as.numeric(sam_table[,exp_var])) %>% 
-    mutate(categories = sam_table[,random_var]) %>%
-    mutate(random_var = sam_table[,random_var]) %>%
+    dplyr::mutate(exp_var = as.numeric(sam_table[,exp_var])) %>% 
+    dplyr::mutate(categories = sam_table[,random_var]) %>%
+    dplyr::mutate(random_var = sam_table[,random_var]) %>%
     drop_na()
   
   colnames(df) <- c("feature", colnames(df[2:4]))

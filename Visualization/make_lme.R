@@ -136,7 +136,7 @@ lme_cor <- function(data,
   ggplot(aes(x = exp_var, y = feature)) +
     geom_point(aes(color = random_var), alpha = 0.85, show.legend = FALSE) +
     geom_smooth(method = "lm", color = "darkgray", se = FALSE) +
-    facet_wrap(. ~ corr_label, ncol = 4) +
+    facet_wrap(. ~ corr_label, nrow = 1) +
     scale_color_brewer(palette = "Set2") + 
     theme_shannon() + 
     xlab(paste(exp_var)) + 

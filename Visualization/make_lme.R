@@ -3,7 +3,7 @@
 # Author: Jacob Agerbo Rasmussen
 # Load necessary packages
 
-lme_cor <- function(data, 
+make_lme_cor <- function(data, 
                     sample_data,
                     feature, 
                     exp_var, 

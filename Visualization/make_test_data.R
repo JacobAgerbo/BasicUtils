@@ -17,6 +17,7 @@ make_test_data <- function(no_samples=100){
   rm(data1, data3, data4,data5)
   rm(data31,data32,data33,data41,data42,data43)
   colnames(data) <- c(paste0("Sample", 1:ncol(data)))
+  rownames(data) <- c(paste0("F", 1:nrow(data)))
   sample_data <- data.frame("Sample"= colnames(data),
                             "Group" = rep(c("GroupA", "GroupB","GroupC","GroupD","GroupE"), each = no_samples/5),
                             "O_Group" = rep(c("GroupA", "GroupB"), each = no_samples/2))

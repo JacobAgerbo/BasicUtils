@@ -20,6 +20,7 @@ make_test_data <- function(no_samples=100){
   rownames(data) <- c(paste0("F", 1:nrow(data)))
   sample_data <- data.frame("Sample"= colnames(data),
                             "Group" = rep(c("GroupA", "GroupB","GroupC","GroupD","GroupE"), each = no_samples/5),
+                            "Batch" = rep(c("Batch1", "Batch2","Batch3","Batch4","Batch5","Batch6","Batch7","Batch8","Batch9","Batch10"), each = no_samples/10),
                             "O_Group" = rep(c("GroupA", "GroupB"), each = no_samples/2),
                             "Treatment" = c(seq(0, 1, length.out = no_samples) + rnorm(no_samples, mean = 0, sd = 0.05)))
   

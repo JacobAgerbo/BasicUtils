@@ -43,10 +43,19 @@ sample_data <- data_list$sample_data
 ```
 
 ### Data overview
+To get a comprehensive overview of data, we can use visualization and statistical techniques such as ridge plots, ECDF, QQ plots, and the Shapiro-Wilk test for normal distribution. Ridge plots stack density plots to create a mountain-like representation of the data, while ECDF provides insights into the overall shape and behavior of the dataset. QQ plots help assess the fit to a theoretical distribution, and the Shapiro-Wilk test provides a formal statistical assessment of normality. Integrating these approaches enhances our understanding of data characteristics and aids in making informed decisions during analysis.
+
+Therefore, when adding a grouping variable as `group_var`you will get this information, if you don't, then you will get the shapiro-wilk test for each feature. 
+
+Beyond plots, a helping description of each method will be printed in the console, when launching the code.
 
 ```
+source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/get_overview.R")
 
+get_overview(data = abundance_data, sample_data = sample_data, group_var = "Group")
 ```
+
+![alt text](Figures/data_overview.png)
 
 ### Preprocessing
 
@@ -61,7 +70,7 @@ Here we produce collector's curves for four random samples. Using random subsamp
 source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_collectors_curves.R")
 
 # generate collector's curves
-make_collectors_curves(data = data, interations = 20)
+make_collectors_curves(data = abundance_data, interations = 20)
 ```
 ![alt text](Figures/Collectors_curves.png)
 
@@ -73,7 +82,7 @@ This is based on the iNEXT *R package*
 source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_iNEXT.R")
 
 # generate iNEXT figure
-do_iNEXT(data = data, sample_data = sample_data, group_var = "O_Group")
+do_iNEXT(data = abundance_data, sample_data = sample_data, group_var = "O_Group")
 ```
 ![alt text](Figures/iNEXT_plot.png)
 
@@ -88,7 +97,7 @@ first_half <- matrix(rnorm(5000, mean = 10, sd = 1.2), nrow = 100, ncol = 50)
 second_half <- matrix(rnorm(5000, mean = 5, sd = .2), nrow = 100, ncol = 50)
 
 # combine the two halves vertically
-data <- cbind(first_half, second_half)
+abundance_data <- cbind(first_half, second_half)
 ```
 But same procedure. Get function and launch. :) 
 

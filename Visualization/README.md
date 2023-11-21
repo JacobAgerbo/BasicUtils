@@ -69,7 +69,7 @@ processed_data <- preprocess_data(data = abundance_data,
                 magic_norm = TRUE)                
 ```
 
-The function returns a plot for comparison, called plot, then processed data and raw data. 
+The function returns a plot for comparison, processed data, and raw data. 
 
 ```
 processed_data$plot

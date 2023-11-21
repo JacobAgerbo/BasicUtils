@@ -60,8 +60,21 @@ get_overview(data = abundance_data, sample_data = sample_data, group_var = "Grou
 ### Preprocessing
 
 ```
+processed_data <- preprocess_data(data = abundance_data,
+                sample_data = sample_data,
+                batch = "Batch",
+                clean_data = TRUE,
+                sum_scaling = TRUE,
+                correct_batch = TRUE,
+                magic_norm = TRUE)                
+```
+
+The function returns a plot for comparison, called plot, then processed data and raw data. 
 
 ```
+processed_data$plot
+```
+![alt text](Figures/Preprocess_data.png)
 
 ### Collector's curves
 Here we produce collector's curves for four random samples. Using random subsampling 20 times. The bold black line indicates the mean of all subsampling.

@@ -60,6 +60,10 @@ get_overview(data = abundance_data, sample_data = sample_data, group_var = "Grou
 ### Preprocessing
 
 ```
+# get function
+source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/proprocess_data.R")
+
+# launch function
 processed_data <- preprocess_data(data = abundance_data,
                 sample_data = sample_data,
                 batch = "Batch",

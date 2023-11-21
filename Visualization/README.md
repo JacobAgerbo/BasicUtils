@@ -8,7 +8,7 @@ This repository contains a basic R scripts (functions) that can be used for anal
 The R functions is thoroughly documented, providing explanations and examples for each function to facilitate its usage and customization. 
 Main functions includes preprocessing multi-variate data from omics, such as filtering, normalization, and transformation. Furthermore, it offers various statistical analysis methods for identifying important feature in the dataset. Key functions are listed below.
 
-- **Data overview**: A function getting an overview of features in dataset. 
+- **Data overview**: A function getting an overview of features in dataset, either individually or across groups of interest. 
   
 - **Preprocessing**: A function for preprocessing omics data, such as quality control, filtering, normalization, and transformation.
 

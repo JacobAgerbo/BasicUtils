@@ -8,6 +8,8 @@ This repository contains a basic R scripts (functions) that can be used for anal
 The R functions is thoroughly documented, providing explanations and examples for each function to facilitate its usage and customization. 
 Main functions includes preprocessing multi-variate data from omics, such as filtering, normalization, and transformation. Furthermore, it offers various statistical analysis methods for identifying important feature in the dataset. Key functions are listed below.
 
+- [**Power Analysis**](#power-analysis): A function getting an overview of your statistically limits and need based on study design.
+
 - [**Data overview**](#data-overview): A function getting an overview of features in dataset, either individually or across groups of interest. 
   
 - [**Preprocessing**](#preprocessing): A function for preprocessing omics data, such as quality control, filtering, normalization, and transformation.
@@ -26,8 +28,6 @@ Main functions includes preprocessing multi-variate data from omics, such as fil
   
 - [**Linear mixed effect models**](#linear-mixed-effect-models): Linear mixed effects models are a type of statistical model used to analyze data with both fixed and random effects. They are particularly useful when dealing with hierarchical or repeated measures data, where observations are nested within groups or subjects. LME models account for within-group correlations and allow for the estimation of fixed effects (predictors that have consistent effects across all groups) and random effects (predictors that vary across groups). These models are commonly used in various fields, including social sciences, psychology, biology, and economics, to analyze longitudinal, clustered, or nested data. They provide a flexible framework for understanding the relationship between predictors and outcomes while accounting for the inherent structure of the data.
 
-
-
 ## Tutorial
 For reproducability purposes I generated a function for generating sandbox data. The output is a list of two dataset. A abundance matrix and a sample information sheet. 
 
@@ -41,6 +41,29 @@ data_list <- make_test_data(100)
 abundance_data <- data_list$data
 sample_data <- data_list$sample_data
 ```
+
+### Power analysis
+A power analysis is a statistical technique used to determine the sample size or the statistical power of a study. It helps researchers estimate the likelihood of detecting a significant effect or relationship between variables, given certain assumptions and constraints.
+
+The main goal of a power analysis is to ensure that a study has sufficient statistical power to detect meaningful effects or differences, if they truly exist. It involves specifying various parameters such as effect size, significance level, and desired power level.
+
+By conducting a power analysis, researchers can make informed decisions about sample size, study design, and data collection methods. It helps optimize resources by ensuring that the sample size is neither too small (leading to low power and increased risk of type II error) nor too large (unnecessarily increasing costs and time).
+
+Power analyses are commonly used in various fields of research, including psychology, biology, medicine, and social sciences. They are particularly useful in experimental and observational studies, clinical trials, and hypothesis testing.
+
+Overall, a power analysis provides valuable insights into the design and planning of a study, enabling researchers to make informed decisions about sample size and statistical power to increase the chances of obtaining meaningful results.
+
+```{R}
+# Get function
+source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_Power_analysis.R")
+
+# Run function
+do_Power(max_sample_size = 100, 
+          min_effect_size = 0.01, 
+          sig.level = 0.05, 
+          power = 0.8)
+```
+![alt text](Figures/Power_analysis.png)
 
 ### Data overview
 To get a comprehensive overview of data, we can use visualization and statistical techniques such as ridge plots, ECDF, QQ plots, and the Shapiro-Wilk test for normal distribution. Ridge plots stack density plots to create a mountain-like representation of the data, while ECDF provides insights into the overall shape and behavior of the dataset. QQ plots help assess the fit to a theoretical distribution, and the Shapiro-Wilk test provides a formal statistical assessment of normality. Integrating these approaches enhances our understanding of data characteristics and aids in making informed decisions during analysis.

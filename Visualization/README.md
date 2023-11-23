@@ -8,23 +8,23 @@ This repository contains a basic R scripts (functions) that can be used for anal
 The R functions is thoroughly documented, providing explanations and examples for each function to facilitate its usage and customization. 
 Main functions includes preprocessing multi-variate data from omics, such as filtering, normalization, and transformation. Furthermore, it offers various statistical analysis methods for identifying important feature in the dataset. Key functions are listed below.
 
-- **Data overview**: A function getting an overview of features in dataset, either individually or across groups of interest. 
+- [**Data overview**](#data-overview): A function getting an overview of features in dataset, either individually or across groups of interest. 
   
-- **Preprocessing**: A function for preprocessing omics data, such as quality control, filtering, normalization, and transformation.
+- [**Preprocessing**](#preprocessing): A function for preprocessing omics data, such as quality control, filtering, normalization, and transformation.
 
-- **Collector's curves**: A function for investigating sufficient data collection.
+- [**Collector's curves**](#collectors-curves): A function for investigating sufficient data collection.
   
-- **Sample-size based extrapolation of richness in data**: The script is thoroughly documented, providing explanations and examples for each function to facilitate its usage and customization.
+- [**Sample-size based extrapolation of richness in data**](#sample-size-based-extrapolation-of-richness-in-data): The script is thoroughly documented, providing explanations and examples for each function to facilitate its usage and customization.
 
-- **Boxplots and statistical comparison of groups**: A function statistical and visual comparison of features between groups
+- [**Boxplots and statistical comparison of groups**](#boxplots-and-statistical-comparison-of-groups): A function statistical and visual comparison of features between groups
 
-- **Composition of features, using barplots**: A function for generating the barplot, which always are used in microbiome studies. Here you can group samples per group, if you like.
+- [**Composition of features, using barplots**](#composition-of-features-using-barplots): A function for generating the barplot, which always are used in microbiome studies. Here you can group samples per group, if you like.
 
-- **Composition analysis, using Principal component analysis (PCA)**: If you know, you know.
+- [**Composition analysis, using Principal component analysis (PCA)**](#composition-analysis-using-principal-component-analysis-pca): PCA is a statistical technique used to reduce the dimensionality of a dataset while retaining as much of the original information as possible. PCA works by identifying the most important features in the data and creating new variables that capture the most variation in the original dataset. These new variables, called principal components, are linear combinations of the original variables and are uncorrelated with each other. PCA is commonly used in data preprocessing and exploratory data analysis.
 
-- **Biomarker predictions, using GLMs or fancy RF**: If you know, you know.
+- [**Biomarker predictions, using GLMs or fancy RF**](#biomarker-predictions-using-glms-or-fancy-rf): Biomarker predictions in omics involve the use of multiple 'omics' data, such as genomics, transcriptomics, proteomics, and metabolomics, to identify molecular signatures that can predict disease risk, progression, and treatment response. Integrative approaches that combine and analyze these omics data have shown promise in addressing various applications, including disease subtyping and biomarker prediction. However, the identification of reliable and robust biomarkers from omics data remains a challenge, as individual-molecule biomarkers often have high false-positive or false-negative rates. But here I give it a go! 
   
-- **Linear mixed effect models**: If you know, you know.
+- [**Linear mixed effect models**](#linear-mixed-effect-models): Linear mixed effects models are a type of statistical model used to analyze data with both fixed and random effects. They are particularly useful when dealing with hierarchical or repeated measures data, where observations are nested within groups or subjects. LME models account for within-group correlations and allow for the estimation of fixed effects (predictors that have consistent effects across all groups) and random effects (predictors that vary across groups). These models are commonly used in various fields, including social sciences, psychology, biology, and economics, to analyze longitudinal, clustered, or nested data. They provide a flexible framework for understanding the relationship between predictors and outcomes while accounting for the inherent structure of the data.
 
 
 

@@ -2,9 +2,10 @@ Package: BasicUtils
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    person("Jacob", "A. Rasmussen", , "jacob.rasmussen@bio.ku.dk", role = "aut",
+           comment = c(ORCID = "0000-0002-7710-8912"))
+Description: 
+    This package provides a collection of functions for basic research of host-microbe interactions, using Omics and multivariate analysis. The package includes functions for preprocessing and analyzing data, such as preprocess_data for data cleaning, normalization, and batch effect correction, and generate_pca_plot for generating PCA plots to visualize the relationships between samples. Other functions include biomarker predictions, power-analysis, group comparison, Linear mixed effect models, etc. These functions are designed to be user-friendly and flexible, allowing researchers to customize their analysis based on their specific needs.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8

@@ -1,5 +1,4 @@
-#' Generate iNEXT Sample-Size-Based Richness Plot
-#' Author: Jacob Agerbo Rasmussen
+#' BasicUtils - Generate iNEXT Sample-Size-Based Richness Plot
 #' 
 #' The `do_iNEXT` function generates a sample-size-based richness plot using the iNEXT package. 
 #' The function takes the following parameters:

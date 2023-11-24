@@ -1,5 +1,4 @@
-#' Generate a barplot of a provided dataset
-#' Author: Jacob Agerbo Rasmussen
+#' BasicUtils - Generate a barplot of a provided dataset
 #' 
 #' The `make_barplot` function is used for generating a barplot of a provided dataset. 
 #' If `tax_data` and `taxa` are specified, the function generates a stacked barplot showing the relative abundance of each taxonomic group in each sample. 

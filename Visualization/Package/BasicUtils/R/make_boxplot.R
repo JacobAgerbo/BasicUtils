@@ -1,5 +1,4 @@
-#' Generate a boxplot
-#' Author: Jacob Agerbo Rasmussen
+#' BasicUtils - Generate a boxplot
 #' 
 #' The `generate_boxplot` function is used for generating a boxplot of a provided dataset. 
 #' If `sample_data` and `group_var` are specified, the function generates a grouped boxplot showing the distribution of values in each group. 

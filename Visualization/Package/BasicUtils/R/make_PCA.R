@@ -1,4 +1,4 @@
-#' Generate PCA Plot
+#' BasicUtils - Generate PCA Plot
 #'
 #' The `generate_pca_plot` function is used to generate a PCA (Principal Component Analysis) plot. It takes several parameters to customize the plot, such as the data, sample information, group variable, color palette, transparency level, legend position, and more.
 #'

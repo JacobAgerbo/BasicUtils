@@ -1,5 +1,4 @@
-#' Perform Linear Mixed-Effects Modeling and Correlation Analysis
-#' Author: Jacob Agerbo Rasmussen
+#' BasicUtils - Perform Linear Mixed-Effects Modeling and Correlation Analysis
 #' 
 #' The `make_lme_cor` function is used to perform linear mixed-effects modeling and correlation analysis. 
 #' It takes the following parameters:

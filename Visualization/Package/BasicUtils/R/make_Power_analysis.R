@@ -1,5 +1,4 @@
-#' Perform Power Analysis for Sample Size and Effect Size
-#' Author: Jacob Agerbo Rasmussen
+#' BasicUtils - Perform Power Analysis for Sample Size and Effect Size
 #' The `do_Power` function is used to perform a power analysis for sample size and effect size. It calculates the required sample size for a given effect size, or the required effect size for a given sample size, based on the desired significance level and power.
 #'
 #' The function performs the following steps:

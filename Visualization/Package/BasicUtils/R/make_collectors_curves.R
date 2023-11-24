@@ -1,5 +1,4 @@
-#' Generate Collector's Curves Plot
-#' Author: Jacob Agerbo Rasmussen
+#' BasicUtils - Generate Collector's Curves Plot
 #' The `make_collectors_curves` function generates a collector's curves plot based on the provided data. 
 #' It calculates rarefaction curves by collecting unique observations for a specific group. 
 #' The function takes the following parameters:

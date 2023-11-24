@@ -1,5 +1,4 @@
-#' Make Test Data
-#' Author: Jacob Agerbo Rasmussen
+#' BasicUtils - Make Test Data
 #' 
 #' The `make_test_data` function generates test data for use in various analyses. It creates a matrix of random numbers using the Poisson distribution and combines them into several data sets of different sizes and variances. It also generates sample information such as group variable, batch variable, treatment variable, and more, and stores them in a data frame.
 #'

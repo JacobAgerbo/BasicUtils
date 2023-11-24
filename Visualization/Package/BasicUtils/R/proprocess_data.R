@@ -1,4 +1,4 @@
-#' Preprocess Data
+#' BasicUtils - Preprocess Data
 #'
 #' The `preprocess_data` function is used to preprocess the input data before further analysis. It performs several preprocessing steps, including data cleaning, normalization, and batch effect correction using ComBat.
 #'

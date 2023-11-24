@@ -1,5 +1,4 @@
-#' Generate descriptive plots of a provided dataset
-#' Author: Jacob Agerbo Rasmussen
+#' BasicUtils - Generate descriptive plots of a provided dataset
 #' 
 #' The `get_overview` function is used for generating descriptive plots of a provided dataset. 
 #' If `group_var` is specified, the function generates four plots: a ridgeline plot, an empirical cumulative distribution function (ECDF) plot, a Q-Q plot, and a distribution plot of individual features. 

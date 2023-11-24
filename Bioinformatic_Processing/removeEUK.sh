@@ -1,6 +1,5 @@
 #!/bin/bash
-
-run_analysis() {
+remove_EUK() {
     # Load necessary modules
     module load trimmomatic kraken2/2.1.2 pigz/2.6.0
 
@@ -77,3 +76,6 @@ run_analysis() {
         exit 1
     fi
 }
+
+
+#bash analyze_metagenome.sh --input /data/samples/ --output /data/output/ --sample sample1 --kraken-db /projects/mjolnir1/apps/databases/kraken2/minikraken2_v2_8GB --threads 4

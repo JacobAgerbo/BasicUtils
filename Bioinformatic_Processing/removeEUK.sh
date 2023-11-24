@@ -78,4 +78,4 @@ remove_EUK() {
 }
 
 
-#bash analyze_metagenome.sh --input /data/samples/ --output /data/output/ --sample sample1 --kraken-db /projects/mjolnir1/apps/databases/kraken2/minikraken2_v2_8GB --threads 4
+#bash removeEUK.sh --input /data/samples/ --output /data/output/ --sample sample1 --kraken-db /projects/mjolnir1/apps/databases/kraken2/minikraken2_v2_8GB --threads 4

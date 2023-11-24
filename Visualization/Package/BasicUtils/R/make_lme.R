@@ -1,7 +1,57 @@
-#!/usr/bin/env Rscript
-# R Script for Generating biomarkers, using random forrest or GLMnet (or both)
-# Author: Jacob Agerbo Rasmussen
-# Load necessary packages
+#' Perform Linear Mixed-Effects Modeling and Correlation Analysis
+#' Author: Jacob Agerbo Rasmussen
+#' 
+#' The `make_lme_cor` function is used to perform linear mixed-effects modeling and correlation analysis. 
+#' It takes the following parameters:
+#'
+#' - `data`: A matrix or data frame containing the data for the analysis.
+#' - `sample_data`: A data frame containing sample information such as treatment and group.
+#' - `feature`: The name of the feature (dependent variable) to be analyzed.
+#' - `exp_var`: The name of the explanatory variable.
+#' - `random_var`: The name of the random effect variable.
+#' - `datatype`: The type of data to be analyzed. It can be "logcpm", "relabu", or "counts".
+#' - `tolerance`: The tolerance value used for computing adjusted correlation.
+#'
+#' The function performs the following steps:
+#'
+#' 1. Loads required packages (`tidyverse`, `performance`, `ggpubr`, `animalcules`, `lmerTest`, `broom.mixed`, and `ggplot2`).
+#' 2. Prepares the data by transforming it based on the specified data type.
+#' 3. Removes rows with zero counts, if any.
+#' 4. Selects the relevant columns from the data frame.
+#' 5. Creates a scatter plot with a linear regression line for each group.
+#' 6. Estimates a mixed-effects model using the `lmerTest` package.
+#' 7. Retrieves the sign of the coefficient and the adjusted correlation.
+#' 8. Computes the p-value using `anova` with Kenward-Roger degrees of freedom adjustment.
+#' 9. Returns the plot and statistics as a list.
+#'
+#' Example usage:
+#' ```R
+#' # Load data
+#' data <- read.csv("data.csv")
+#' sample_data <- read.csv("sample_info.csv")
+#'
+#' # Perform linear mixed-effects modeling and correlation analysis
+#' make_lme_cor(data, sample_data, "feature", "exp_var", "random_var", datatype = "logcpm", tolerance = 0.1)
+#' ```
+#'
+#' @param data A matrix or data frame containing the data for the analysis
+#' @param sample_data A data frame containing sample information such as treatment and group
+#' @param feature The name of the feature (dependent variable) to be analyzed
+#' @param exp_var The name of the explanatory variable
+#' @param random_var The name of the random effect variable
+#' @param datatype The type of data to be analyzed (default: "logcpm")
+#' @param tolerance The tolerance value used for computing adjusted correlation
+#'
+#' @return A list containing the scatter plot and statistics
+#' 
+#' @import tidyverse
+#' @import performance
+#' @import ggpubr
+#' @import animalcules
+#' @import lmerTest
+#' @import broom.mixed
+#' @import ggplot2
+#'
 
 make_lme_cor <- function(data, 
                     sample_data,

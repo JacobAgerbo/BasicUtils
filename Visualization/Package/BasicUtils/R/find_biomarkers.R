@@ -1,9 +1,6 @@
-#!/usr/bin/env Rscript
-# R Script for Generating biomarkers, using random forrest or GLMnet (or both)
-# Author: Jacob Agerbo Rasmussen
-
 #' Biomarker detection using different classifiers
-#'
+#' Author: Jacob Agerbo Rasmussen
+#' 
 #' @param data A multivariate matrix, like an abundance table
 #' @param sample_data The classification level used for feature
 #' @param exp_var A binary variable for classification from sample_data
@@ -13,7 +10,20 @@
 #' @param method Choose between Generalized Linear Models (GLMs), Random Forrest (RF), or both
 #' @param prevalence_tolerance tolerance for be counted as present in sample, when doing prevalence testing (default is 1/number of samples) 
 #' @return A ggplot object for pdf saving, and a table with statistics, and a plot of the trained model
-#'
+#' @import tidyverse
+#' @import doParallel
+#' @import future
+#' @import reshape2
+#' @import cowplot
+#' @import ggpubr
+#' @import animalcules
+#' @import plotROC
+#' @import MASS
+#' @import caret
+#' @import wesanderson
+#' @import hilldiv
+#' 
+#' 
 #' @examples
 #' make_test_data <- source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_test_data.R")[["value"]]
 #' test_data <-make_test_data(10)
@@ -26,6 +36,7 @@
 #'                           top_biomarker=0.1,
 #'                           prevalence_tolerance=NULL, threads = 4)
 #' p
+
 
 # Define the function
 find_biomarkers <- function(data,

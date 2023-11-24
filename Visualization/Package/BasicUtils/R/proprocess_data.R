@@ -1,12 +1,48 @@
-#!/usr/bin/env Rscript
-#The provided function preprocess_data is designed to preprocess data in R. 
-#It takes several parameters such as data, sample_data, batch, clean_data, sum_scaling, magic_norm, and correct_batch. 
-#The function performs various data cleaning and normalization steps based on the specified parameters. 
-#It also utilizes packages like sva, tidyverse, and cowplot for data manipulation and visualization. 
-#The function generates plots to detect outliers in the raw and processed data, 
-#and it can also perform batch effect correction using the ComBat method. 
-#The final output of the function includes the generated plots, the processed data, and the original data.
-
+#' Preprocess Data
+#'
+#' The `preprocess_data` function is used to preprocess the input data before further analysis. It performs several preprocessing steps, including data cleaning, normalization, and batch effect correction using ComBat.
+#'
+#' The function performs the following steps:
+#' 1. Loads the necessary packages, including `sva`, `tidyverse`, and `cowplot`.
+#' 2. Stores a copy of the original data in `prior_data`.
+#' 3. If `clean_data` is set to `TRUE`, removes missing or invalid values from the data and removes duplicate samples or features.
+#' 4. If `sum_scaling` is set to `TRUE`, performs total sum scaling normalization on the data.
+#' 5. If `magic_norm` is set to `TRUE`, applies inverse normal transformation (INT) to normalize continuous phenotype data.
+#' 6. If `correct_batch` is set to `TRUE`, identifies batch information from `sample_data` and performs batch effect correction using ComBat.
+#' 7. Generates outlier detection plots for raw and processed data if applicable.
+#' 8. Generates PCA plots for raw and batch-corrected data if applicable.
+#' 9. Combines the outlier detection plots and PCA plots into a single plot.
+#' 10. Returns the combined plot, processed data, and raw data as output.
+#'
+#' Example usage:
+#' ```R
+#' # Preprocess data
+#' preprocessed <- preprocess_data(data, sample_data = sample_data, batch = "Group", clean_data = TRUE, sum_scaling = TRUE, magic_norm = FALSE, correct_batch = TRUE)
+#'
+#' # Access the combined plot
+#' preprocessed$plot
+#'
+#' # Access the processed data
+#' preprocessed$processed_data
+#'
+#' # Access the raw data
+#' preprocessed$raw_data
+#' ```
+#'
+#' @import sva
+#' @import tidyverse
+#' @import cowplot
+#'
+#' @param data A matrix or data frame containing the input data to be preprocessed.
+#' @param sample_data A data frame containing sample information, such as batch information.
+#' @param batch The name of the column in `sample_data` that represents the batch information.
+#' @param clean_data A logical value indicating whether to perform data cleaning (removing missing or invalid values and duplicate samples or features). Default is `TRUE`.
+#' @param sum_scaling A logical value indicating whether to perform total sum scaling normalization. Default is `TRUE`.
+#' @param magic_norm A logical value indicating whether to perform inverse normal transformation (INT) for normalization of continuous phenotype data. Default is `FALSE`.
+#' @param correct_batch A logical value indicating whether to perform batch effect correction using ComBat. Default is `TRUE`.
+#'
+#' @return A list containing the combined plot, processed data, and raw data.
+#' 
 preprocess_data <- function(data, 
                             sample_data = NULL, 
                             batch = "Group", 

@@ -1,4 +1,37 @@
-#!/usr/bin/env Rscript
+#' Perform Power Analysis for Sample Size and Effect Size
+#' Author: Jacob Agerbo Rasmussen
+#' The `do_Power` function is used to perform a power analysis for sample size and effect size. It calculates the required sample size for a given effect size, or the required effect size for a given sample size, based on the desired significance level and power.
+#'
+#' The function performs the following steps:
+#' 1. Loads the necessary packages, including `pwr`, `tidyverse`, `scales`, and `cowplot`.
+#' 2. Checks if the maximum sample size is less than 20, and displays a warning message if it is.
+#' 3. Defines the effect size categories (low, medium, and large).
+#' 4. Calculates the required sample sizes for different effect sizes using the `pwr.t.test` function.
+#' 5. Creates a scatter plot of sample size versus effect size, with a logarithmic x-axis.
+#' 6. Adds horizontal lines and text annotations to indicate the effect size categories.
+#' 7. Calculates the required effect sizes for different sample sizes using the `pwr.t.test` function.
+#' 8. Creates a second scatter plot of effect size versus sample size, with a logarithmic x-axis.
+#' 9. Adds horizontal lines and text annotations to indicate the effect size categories.
+#' 10. Combines both scatter plots into a single plot using `cowplot::plot_grid`.
+#' 11. Returns the combined plot as the output.
+#'
+#' Example usage:
+#' ```R
+#' # Perform power analysis
+#' do_Power(max_sample_size = 100, min_effect_size = 0.01, sig.level = 0.05, power = 0.8)
+#' ```
+#'
+#' @param max_sample_size The maximum sample size to consider in the power analysis.
+#' @param min_effect_size The minimum effect size to consider in the power analysis.
+#' @param sig.level The desired significance level (Type I error rate) for the power analysis.
+#' @param power The desired power (1 - Type II error rate) for the power analysis.
+#'
+#' @import pwr
+#' @import tidyverse
+#' @import scales
+#' @import cowplot
+#'
+#' @return A combined scatter plot of sample size versus effect size and effect size versus sample size.
 do_Power <- function(max_sample_size = 100, min_effect_size = 0.01, sig.level = 0.05, power = 0.8){
   
   # Load the necessary packages

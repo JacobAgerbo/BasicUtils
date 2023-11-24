@@ -1,5 +1,30 @@
-#!/usr/bin/env Rscript
-# Make test data
+#' Make Test Data
+#' Author: Jacob Agerbo Rasmussen
+#' 
+#' The `make_test_data` function generates test data for use in various analyses. It creates a matrix of random numbers using the Poisson distribution and combines them into several data sets of different sizes and variances. It also generates sample information such as group variable, batch variable, treatment variable, and more, and stores them in a data frame.
+#'
+#' The function performs the following steps:
+#' 1. Sets the seed for reproducibility.
+#' 2. Generates a matrix of random numbers using the Poisson distribution.
+#' 3. Combines the matrix into several data sets of different sizes and variances.
+#' 4. Generates sample information such as group variable, batch variable, treatment variable, and more, and stores them in a data frame.
+#' 5. Prints a message indicating that test data has been generated.
+#' 6. Returns a list containing the generated data and sample information.
+#'
+#' Example usage:
+#' ```R
+#' # Generate test data
+#' test_data <- make_test_data()
+#' 
+#' # Access generated data and sample information
+#' data <- test_data$data
+#' sample_data <- test_data$sample_data
+#' ```
+#'
+#' @param no_samples The number of samples to generate. The default is 100.
+#'
+#' @return A list containing the generated data and sample information.
+#'
 
 make_test_data <- function(no_samples=100){
   set.seed(1234)

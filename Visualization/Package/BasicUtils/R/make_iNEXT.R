@@ -1,6 +1,48 @@
-#!/usr/bin/env Rscript
-# R Script for Generating iNEXT's sample-size-based richness  Plot
-# Author: Jacob Agerbo Rasmussen
+#' Generate iNEXT Sample-Size-Based Richness Plot
+#' Author: Jacob Agerbo Rasmussen
+#' 
+#' The `do_iNEXT` function generates a sample-size-based richness plot using the iNEXT package. 
+#' The function takes the following parameters:
+#' 
+#' - `data`: The dataset containing the observations.
+#' - `sample_data`: The dataset containing the sample data (default: NULL).
+#' - `group_var`: The variable used to group the samples (default: NULL).
+#' - `table`: A logical value indicating whether to return the extrapolated data as a table (default: FALSE).
+#' - `threads`: The number of parallel threads to use (default: 2).
+#' 
+#' The function loads the required packages (`tidyverse`, `iNEXT`, `ggtext`, `ggpubr`, `doParallel`, and `future`) and calculates iNEXT diversity for the provided data. 
+#' If a group variable is provided, the function aggregates the data by summing values across each row and performs iNEXT analysis on the relevant columns of the aggregated data. 
+#' If no group variable is provided, the function sums the values across the columns and performs iNEXT analysis on the resulting data.
+#'
+#' The function then generates an iNEXT plot type 1 with reordered facets, sets the theme to minimal, and adds a dashed line representing the intercept and slope. 
+#' The plot title, y-axis label, and caption are customized using the `ggtext` package. 
+#'
+#' If the `table` parameter is set to `TRUE`, the function returns both the plot and an extrapolated data table as a list. Otherwise, it returns only the plot.
+#' 
+#' Finally, the function stops the parallel cluster.
+#'
+#' Example usage:
+#' ```R
+#' # Load data
+#' data(iris)
+#'
+#' # Generate iNEXT plot for iris dataset
+#' do_iNEXT(iris[,1:4])
+#' ```
+#'
+#' @param data The dataset containing the observations
+#' @param sample_data The dataset containing the sample data (default: NULL)
+#' @param group_var The variable used to group the samples (default: NULL)
+#' @param table A logical value indicating whether to return the extrapolated data as a table (default: FALSE)
+#' @param threads The number of parallel threads to use (default: 2)
+#' @import tidyverse
+#' @import iNEXT
+#' @import ggtext
+#' @import ggpubr
+#' @import doParallel
+#' @import future
+
+
 
 # Define function to create iNEXT figure
 do_iNEXT <- function(data, sample_data = NULL, group_var = NULL, table=FALSE, threads=2) {

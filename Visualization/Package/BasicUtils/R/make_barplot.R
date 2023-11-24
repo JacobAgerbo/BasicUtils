@@ -1,8 +1,24 @@
-#!/usr/bin/env Rscript
-# R Script for Generating barplots, with grouping and taxonomic information
-# Author: Jacob Agerbo Rasmussen
-# Load necessary packages
-
+#' Generate a barplot of a provided dataset
+#' Author: Jacob Agerbo Rasmussen
+#' 
+#' The `make_barplot` function is used for generating a barplot of a provided dataset. 
+#' If `tax_data` and `taxa` are specified, the function generates a stacked barplot showing the relative abundance of each taxonomic group in each sample. 
+#' If `grouping` is set to TRUE, the function generates a grouped barplot showing the mean relative abundance of each taxonomic group in each sample group. 
+#' If `tax_data` is not specified, the function generates a simple barplot showing the values of each variable in each sample.
+#'
+#' @param data The dataset to be analyzed
+#' @param sample_data The sample information dataset
+#' @param tax_data The taxonomic information dataset
+#' @param taxa The taxonomic group to be plotted
+#' @param group The grouping variable to be used for generating a grouped barplot
+#' @param grouping A logical value indicating whether to generate a grouped barplot
+#' @return A ggplot barplot
+#' @import tidyverse 
+#' @import ggpubr
+#' @import ggplot2
+#' @import hilldiv
+#' 
+#' @export
 
 make_barplot <- function(data = data,
                          sample_data = NULL,
@@ -94,39 +110,3 @@ make_barplot <- function(data = data,
         })
     })
 }
-
-
-# Generate test data
-#set.seed(1234)
-#data1 <- matrix(rpois(4700, 50), nrow = 47)
-#data2 <- matrix(rpois(5000, 4), nrow = 50)
-#data31 <- matrix(rpois(50, 1000), nrow = 1)
-#data32 <- matrix(rpois(50, 1000), nrow = 1)
-#data33 <- matrix(rpois(50, 200), nrow = 1)
-#data41 <- matrix(rpois(50, 100), nrow = 1)
-#data42 <- matrix(rpois(50, 50), nrow = 1)
-#data43 <- matrix(rpois(50, 1000), nrow = 1)
-#data3 <- cbind(data31,data41)
-#data4 <- cbind(data32,data42)
-#data5 <- cbind(data33,data43)
-#rm(data1, data2, data3, data4,data5)
-#rm(data31,data32,data33,data41,data42,data43)
-#colnames(data) <- c(paste0("Sample", 1:ncol(data)))
-#rownames(data) <- c(paste0("F", 1:nrow(data)))
-
-#sample_data <- data.frame("Sample"= colnames(data),
-#                          "Group" = rep(c("GroupA", "GroupB", "GroupC", "GroupD", "GroupE"), each = 20))
-
-
-#tax_data <- data.frame("Phylum"= rep(c("PhyA", "PhyB", "PhyC", "PhyD", "PhyE"), each = 10),
-#                       "Order"= rep(c("OrdA", "OrdB", "OrdC", "OrdD", "OrdE"), each = 10),
-#                       "Class"= rep(c("ClassA", "ClassB", "ClassC", "ClassD", "ClassE"), each = 10),
-#                       "Family"= rep(c("FamA", "FamB", "FamC", "FamD", "FamE"), each = 10),
-#                       "Genus"= rep(c("GenA", "GenB", "GenC", "GenD", "GenE", "GenF", "GenG", "GenH", "GenI", "GenJ"), each = 10))
-
-
-#make_barplot(data = data,
-#                         sample_data = sample_data,
-#                         tax_data = tax_data,
-#                         taxa = "Genus",
-#                         grouping = TRUE, group = "Group")

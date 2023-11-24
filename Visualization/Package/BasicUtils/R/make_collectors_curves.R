@@ -1,7 +1,38 @@
-#!/usr/bin/env Rscript
-# R Script for Generating collector's curves Plot
-# Author: Jacob Agerbo Rasmussen
-# Load necessary packages
+#' Generate Collector's Curves Plot
+#' Author: Jacob Agerbo Rasmussen
+#' The `make_collectors_curves` function generates a collector's curves plot based on the provided data. 
+#' It calculates rarefaction curves by collecting unique observations for a specific group. 
+#' The function takes the following parameters:
+#' 
+#' - `data`: The dataset containing the observations.
+#' - `iterations`: The number of iterations to perform for each group (default: 5).
+#' - `threads`: The number of parallel threads to use (default: 2).
+#' 
+#' The function utilizes the `tidyverse`, `reshape2`, `cowplot`, `doParallel`, and `future` packages.
+#' It also defines a custom theme called `theme_ridges` for the plot.
+#' 
+#' Example usage:
+#' ```R
+#' # Create a sample data frame and group variable
+#' set.seed(1234)
+#' data <- matrix(rpois(1000, 5), nrow = 100)
+#' colnames(data) <- paste0("Group", 1:ncol(data))
+#' group_var <- rep(colnames(data), each = nrow(data))
+#'
+#' # Generate plots for the sample data frame and group variable
+#' generate_plots(data, group_var, iterations = 50)
+#' ```
+#'
+#' @param data The dataset containing the observations
+#' @param iterations The number of iterations to perform for each group (default: 5)
+#' @param threads The number of parallel threads to use (default: 2)
+#' @return A collector's curves plot
+#' @import tidyverse
+#' @import reshape2
+#' @import cowplot
+#' @import doParallel
+#' @import future
+#' @export
 
 # Define the function
 make_collectors_curves <- function(data, interations = 5, threads = 2){

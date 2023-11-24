@@ -2,7 +2,8 @@
 % Please edit documentation in R/find_biomarkers.R
 \name{find_biomarkers}
 \alias{find_biomarkers}
-\title{Biomarker detection using different classifiers}
+\title{Biomarker detection using different classifiers
+Author: Jacob Agerbo Rasmussen}
 \usage{
 find_biomarkers(
   data,
@@ -37,6 +38,7 @@ A ggplot object for pdf saving, and a table with statistics, and a plot of the t
 }
 \description{
 Biomarker detection using different classifiers
+Author: Jacob Agerbo Rasmussen
 }
 \examples{
 make_test_data <- source("https://raw.githubusercontent.com/JacobAgerbo/Basic_Utils/main/Visualization/make_test_data.R")[["value"]]

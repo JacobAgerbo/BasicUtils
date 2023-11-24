@@ -1,7 +1,31 @@
-#!/usr/bin/env Rscript
-# R Script for Generating PCA Plot
-# Author: Jacob Agerbo Rasmussen
-# Load required libraries
+#' Generate a boxplot
+#' Author: Jacob Agerbo Rasmussen
+#' 
+#' The `generate_boxplot` function is used for generating a boxplot of a provided dataset. 
+#' If `sample_data` and `group_var` are specified, the function generates a grouped boxplot showing the distribution of values in each group. 
+#' If `violin` is set to TRUE, the function generates a violin plot instead of a boxplot. 
+#' If `jitter` is set to TRUE, the function adds jitter points to the plot. 
+#' If `test` is set to TRUE, the function performs a statistical test (Levene's test) and adds p-values and significance labels to the plot.
+#'
+#' @param data The dataset to be analyzed
+#' @param sample_data The sample information dataset
+#' @param group_var The grouping variable to be used for generating a grouped boxplot
+#' @param plot_title The title of the plot
+#' @param palette The color palette to be used for the plot
+#' @param violin A logical value indicating whether to generate a violin plot instead of a boxplot
+#' @param jitter A logical value indicating whether to add jitter points to the plot
+#' @param test A logical value indicating whether to perform a statistical test and add p-values and significance labels to the plot
+#' @return A boxplot or violin plot
+#' @import ggpubr
+#' @import rstatix
+#' @import tidyverse
+#' @import reshape2
+#' @import RColorBrewer
+#' @export
+#' @examples
+#' # Generate a simple boxplot
+#' generate_boxplot(data, group_var = group_var, jitter = TRUE,
+#'                violin = FALSE, test = TRUE)
 
 # Define a function to generate a boxplot
 generate_boxplot <- function(data,

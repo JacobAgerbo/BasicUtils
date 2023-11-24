@@ -1,5 +1,5 @@
 #' Biomarker detection using different classifiers
-#' Author: Jacob Agerbo Rasmussen
+#' @author Jacob Agerbo Rasmussen
 #' 
 #' @param data A multivariate matrix, like an abundance table
 #' @param sample_data The classification level used for feature

@@ -1,6 +1,6 @@
 # Basic R functions for visualization of multi-variate analysis
 
-*Currently this haven't been made to an R-package, but we are on it*
+*These visualisations are based on our home-knitted R package BasicUtilR*
 
 This repository contains a basic R scripts (functions) that can be used for analyzing multi-variate analysis from bacteria and host-microbe interactions using omics data. 
 

@@ -9,11 +9,11 @@
 
 preprocess_data <- function(data, 
                             sample_data = NULL, 
-                            batch = "Group", 
+                            batch = NULL, 
                             clean_data = TRUE, 
                             sum_scaling = TRUE, 
                             magic_norm = FALSE, 
-                            correct_batch = TRUE) {
+                            correct_batch = FALSE) {
   
   suppressPackageStartupMessages(library(sva))
   suppressPackageStartupMessages(library(tidyverse))
